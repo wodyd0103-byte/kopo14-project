@@ -354,6 +354,197 @@
   color: var(--accent);
 }
 
+/* ---- 별점 표시 ----
+   같은 별 다섯 개를 겹쳐 두고 위쪽을 값만큼만 잘라, 0.1 단위까지 드러낸다 */
+.stars {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.stars-bg {
+  color: var(--border);
+}
+
+.stars-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #f5a623;
+}
+
+.stars.sm {
+  font-size: 13px;
+}
+.stars.md {
+  font-size: 16px;
+}
+.stars.lg {
+  font-size: 26px;
+  letter-spacing: 2px;
+}
+
+/* ---- 평점 입력 (0.1 단위 슬라이더) ---- */
+.rating-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rating-caption {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rating-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-h);
+  font-variant-numeric: tabular-nums;
+}
+
+.rating-slider {
+  width: 100%;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.rating-slider:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.review-score {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-h);
+}
+
+/* ---- 검색창 ---- */
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.search-box input {
+  width: 100%;
+  font: inherit;
+  font-size: 16px;
+  padding: 12px 40px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+/* 브라우저가 붙이는 기본 지우기 버튼과 겹치지 않게 */
+.search-box input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.search-clear {
+  position: absolute;
+  right: 12px;
+  font: inherit;
+  font-size: 13px;
+  line-height: 1;
+  padding: 6px;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.search-clear:hover {
+  color: var(--accent);
+}
+
+.result-count {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* ---- 지도 ---- */
+.map-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.map-holder {
+  height: 460px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  /* Leaflet 타일이 카드 위로 올라오지 않도록 */
+  z-index: 0;
+}
+
+.map-legend {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.map-legend button {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font: inherit;
+  text-align: left;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-h);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.map-legend button:hover {
+  border-color: var(--accent-border);
+}
+
+.map-legend span {
+  font-size: 12px;
+  color: var(--text);
+}
+
+@media (max-width: 480px) {
+  .map-holder {
+    height: 340px;
+  }
+}
+
 /* 리뷰가 누구 이름으로 올라가는지 알리는 줄 */
 .review-as {
   margin: 0;

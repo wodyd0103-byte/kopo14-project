@@ -34,6 +34,9 @@ export interface Restaurant {
   likeCount?: number
   likedByMe?: boolean
   favoritedByMe?: boolean
+  // 평점순 정렬에만 쓰는 값. 리뷰가 적으면 전체 평균 쪽으로 당겨진다.
+  // 화면에 보여주지 않는다 — 보이는 평점은 rating 그대로다.
+  score?: number
 }
 
 export interface Review {

@@ -13,6 +13,7 @@ import { formatRating } from './stats'
 import { LikeButton } from './like'
 import DeleteRestaurant from './delete'
 import LoginForm from './login-form'
+import Stars from './star-rating'
 
 interface Props {
   restaurant: Restaurant
@@ -27,7 +28,10 @@ type ReviewForm = {
 
 // 작성자는 로그인한 사람으로 정해진다. 예전에는 직접 입력받아서
 // 남의 이름을 대고 리뷰를 남길 수 있었다.
-const EMPTY_REVIEW: ReviewForm = { rating: 5, comment: '' }
+//
+// 처음 값을 5점에 두면 다들 만점에서 시작해 잘 안 내린다. 실제로 기존 23건이
+// 3·4·5점 세 가지뿐이었다. 한 칸 내려 두어 손이 가게 한다.
+const EMPTY_REVIEW: ReviewForm = { rating: 4, comment: '' }
 
 // 항목 클릭 시 열리는 상세 모달 (음식점 정보 + 리뷰 목록/작성/삭제)
 function Modal({ restaurant, onClose, onDeleted }: Props) {
@@ -74,8 +78,8 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
     setForm((prev) => ({ ...prev, [name]: value }))
   }
 
-  // 평점 선택 (숫자 필드)
-  const handleRatingChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  // 평점 선택 (0.1 단위 슬라이더)
+  const handleRatingChange = (e: ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, rating: Number(e.target.value) }))
   }
 
@@ -208,7 +212,10 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
           {reviews.map((review) => (
             <li key={review.id} className="review-item">
               <p className="review-head">
-                <b>{review.author}</b> ⭐ {review.rating} · {review.date}
+                <b>{review.author}</b>{' '}
+                <Stars value={review.rating} size="sm" />{' '}
+                <span className="review-score">{review.rating.toFixed(1)}</span> ·{' '}
+                {review.date}
                 {/* 내가 쓴 리뷰만 지울 수 있다. 작성자를 모르는 옛 리뷰는 아무도 못 지운다. */}
                 {user && review.userId === user.id && (
                   <button
@@ -236,16 +243,23 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
           <p className="review-as">
             <b>{user.nickname}</b>님 이름으로 올라갑니다.
           </p>
-          <label>
-            평점
-            <select name="rating" value={form.rating} onChange={handleRatingChange}>
-              {[5, 4, 3, 2, 1].map((n) => (
-                <option key={n} value={n}>
-                  {n}점
-                </option>
-              ))}
-            </select>
-          </label>
+          <div className="rating-input">
+            <span className="rating-caption">평점</span>
+            <div className="rating-row">
+              <Stars value={form.rating} size="lg" />
+              <output className="rating-value">{form.rating.toFixed(1)}</output>
+            </div>
+            <input
+              type="range"
+              className="rating-slider"
+              min={0.1}
+              max={5}
+              step={0.1}
+              value={form.rating}
+              onChange={handleRatingChange}
+              aria-label="평점 (0.1점 단위)"
+            />
+          </div>
           <textarea
             name="comment"
             value={form.comment}

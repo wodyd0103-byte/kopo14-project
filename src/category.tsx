@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { useRestaurants } from './restaurant-context'
 import RestaurantList from './list'
 import Modal from './modal'
@@ -7,8 +8,21 @@ import Modal from './modal'
 function Category() {
   const { restaurants, toggleFavorite, toggleLike, reload } = useRestaurants()
   const [selectedCategory, setSelectedCategory] = useState('전체')
-  // 리뷰 등록 후에도 최신 평점이 보이도록 객체가 아닌 id를 보관
-  const [selectedId, setSelectedId] = useState<number | null>(null)
+
+  // 홈과 같은 방식 — 연 가게를 주소에 남긴다
+  const [params, setParams] = useSearchParams()
+  const selectedId = Number(params.get('r')) || null
+
+  const open = (id: number) => {
+    const next = new URLSearchParams(params)
+    next.set('r', String(id))
+    setParams(next)
+  }
+  const close = () => {
+    const next = new URLSearchParams(params)
+    next.delete('r')
+    setParams(next)
+  }
 
   // 데이터에 존재하는 카테고리 목록 (+ 전체)
   const categories = [
@@ -38,19 +52,17 @@ function Category() {
         ))}
       </div>
 
+      <p className="result-count">{filtered.length}곳</p>
+
       <RestaurantList
         restaurants={filtered}
         onToggleFavorite={toggleFavorite}
         onToggleLike={toggleLike}
-        onSelect={(r) => setSelectedId(r.id)}
+        onSelect={(r) => open(r.id)}
       />
 
       {selected && (
-        <Modal
-          restaurant={selected}
-          onClose={() => setSelectedId(null)}
-          onDeleted={reload}
-        />
+        <Modal restaurant={selected} onClose={close} onDeleted={reload} />
       )}
     </div>
   )

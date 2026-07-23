@@ -21,6 +21,11 @@ export function statsOf(reviews: Review[], restaurantId: number): RestaurantStat
   return { rating: round1(sum / mine.length), reviewCount: mine.length }
 }
 
+// 순위를 매길 때 리뷰 한 건짜리 5.0이 열 건짜리 4.5를 이기지 않도록 하는 무게.
+// '평균 점수의 리뷰가 이만큼 미리 달려 있다'고 치고 계산한다.
+// 크게 잡을수록 리뷰가 많아야 순위가 오른다.
+const PRIOR_REVIEWS = 5
+
 // 모든 음식점의 rating/reviewCount를 리뷰 데이터 기준으로 다시 계산해 덮어씀
 // (리뷰가 유일한 기준 — 저장된 값이 아니라 이 결과가 화면/정렬에 쓰임)
 export function applyReviewStats(
@@ -36,12 +41,21 @@ export function applyReviewStats(
     acc.set(v.restaurantId, cur)
   }
 
+  // 전체 평균 — 리뷰가 적은 가게를 이쪽으로 끌어당긴다
+  const overall =
+    reviews.length > 0
+      ? reviews.reduce((sum, v) => sum + v.rating, 0) / reviews.length
+      : 0
+
   return restaurants.map((r) => {
     const s = acc.get(r.id)
     return {
       ...r,
+      // 화면에 보이는 평점은 있는 그대로의 평균이다. 순위 때문에 점수를 속이지 않는다.
       rating: s ? round1(s.sum / s.count) : 0,
       reviewCount: s ? s.count : 0,
+      // 정렬에만 쓰는 값. 리뷰가 없으면 0이라 맨 뒤로 간다.
+      score: s ? (overall * PRIOR_REVIEWS + s.sum) / (PRIOR_REVIEWS + s.count) : 0,
     }
   })
 }
@@ -92,9 +106,10 @@ export function formatRating(restaurant: Restaurant): string {
   return restaurant.reviewCount === 0 ? '–' : restaurant.rating.toFixed(1)
 }
 
-// 정렬 지표 하나를 숫자로 뽑아낸다
+// 정렬 지표 하나를 숫자로 뽑아낸다.
+// 평점순은 보이는 평점이 아니라 리뷰 수를 반영한 score로 줄을 세운다.
 function metric(r: Restaurant, key: SortKey): number {
-  if (key === 'rating') return r.rating
+  if (key === 'rating') return r.score ?? r.rating
   if (key === 'reviewCount') return r.reviewCount
   return r.likeCount ?? 0
 }

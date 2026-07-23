@@ -5,6 +5,7 @@ import { useRestaurants } from "./restaurant-context";
 import LoginForm from "./login-form";
 import Home from "./home";
 import Category from "./category";
+import MapPage from "./map";
 import Best from "./best";
 import CreatePage from "./create-page";
 import EditRestaurant from "./edit";
@@ -38,6 +39,7 @@ function Shell() {
       <nav className="nav">
         <Link to="/">전체</Link>
         <Link to="/category">카테고리</Link>
+        <Link to="/map">지도</Link>
         <Link to="/best">베스트</Link>
         <Link to="/new">음식점 등록</Link>
       </nav>
@@ -60,6 +62,7 @@ function Shell() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/category" element={<Category />} />
+          <Route path="/map" element={<MapPage />} />
           <Route path="/best" element={<Best />} />
           <Route path="/new" element={<CreatePage />} />
           <Route path="/edit/:id" element={<EditRestaurant />} />
