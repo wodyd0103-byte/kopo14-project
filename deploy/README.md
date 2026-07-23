@@ -56,6 +56,23 @@ kubectl -n ingress-nginx wait --for=condition=ready pod -l app.kubernetes.io/com
 컨트롤러 Service의 `EXTERNAL-IP`는 계속 `<pending>`으로 남습니다. 정상입니다 —
 아래 '접속하기'에서 설명합니다.
 
+그런데 이것 때문에 Ingress에 주소가 안 찍히고, **ArgoCD가 앱을 영원히
+`Progressing`으로 표시합니다.** 파드가 다 떠 있어도 그렇습니다. 컨트롤러가
+주소를 직접 게시하도록 바꿔 주면 해결됩니다.
+
+```powershell
+kubectl -n ingress-nginx patch deployment ingress-nginx-controller --type=json --% -p=[{"op":"remove","path":"/spec/template/spec/containers/0/args/1"},{"op":"add","path":"/spec/template/spec/containers/0/args/-","value":"--publish-status-address=localhost"}]
+kubectl -n ingress-nginx rollout status deployment/ingress-nginx-controller
+```
+
+인덱스 1을 지우는 것은 `--publish-service`입니다. **둘은 동시에 못 씁니다** —
+같이 두면 컨트롤러가 `mutually exclusive` 오류로 CrashLoopBackOff에 빠집니다.
+지우기 전에 무엇이 1번인지 확인하세요.
+
+```powershell
+kubectl -n ingress-nginx get deployment ingress-nginx-controller -o jsonpath="{range .spec.template.spec.containers[0].args[*]}{@}{'\n'}{end}"
+```
+
 ### 3. ArgoCD
 
 `--server-side`가 **필요합니다.** 그냥 `apply` 하면 ArgoCD의 CRD 하나가
@@ -92,7 +109,9 @@ kubectl -n argocd port-forward svc/argocd-server 8080:443
 kubectl -n ingress-nginx port-forward svc/ingress-nginx-controller 8080:80
 ```
 
-**이 창은 켜 둔 채로 두세요.** 닫으면 접속이 끊깁니다.
+**이 창은 켜 둔 채로 두세요.** 닫으면 접속이 끊깁니다. 그리고 Ingress 컨트롤러
+파드가 교체되면(재시작·업그레이드 등) **port-forward도 같이 죽습니다.** 갑자기
+"연결할 수 없음"이 뜨면 이 명령을 다시 실행하세요.
 
 → http://localhost:8080
 
@@ -236,6 +255,18 @@ kubectl -n kopo14 exec deploy/kopo14-web -- cat /etc/nginx/conf.d/default.conf
 
 **등록한 가게가 재배포 후 사라짐**
 PVC가 안 붙었을 수 있습니다. `kubectl -n kopo14 get pvc`에서 `Bound`인지 보세요.
+정상이라면 api 파드 로그 첫 줄이 `기존 /data/db.json 을 그대로 사용합니다`여야 합니다.
+`초기 데이터를 복사합니다`가 나오면 볼륨이 새로 만들어진 것입니다.
+
+**ArgoCD는 Healthy인데 브라우저가 "연결할 수 없음"**
+클러스터는 멀쩡하고 port-forward만 끊긴 경우입니다. 위 4번 명령을 다시 실행하세요.
+클러스터 안에서만 확인해 보려면:
+
+```powershell
+kubectl run t --rm -i --restart=Never --image=curlimages/curl -- curl -s -o /dev/null -w "%{http_code}\n" -H "Host: localhost" http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/restaurants
+```
+
+여기서 200이 나오면 앱은 정상이고 문제는 port-forward입니다.
 
 **데이터를 초기 상태로 되돌리고 싶음**
 
