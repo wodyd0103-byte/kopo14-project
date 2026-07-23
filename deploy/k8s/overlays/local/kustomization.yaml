@@ -11,7 +11,7 @@ resources:
 images:
 - name: ghcr.io/wodyd0103-byte/kopo14-api
   newName: ghcr.io/wodyd0103-byte/kopo14-api
-  newTag: ac1e9f1cc0abb643e5b8fd2ce891c59d58194f84
+  newTag: 27ec21ee97bff43625c4b16868c831ea4e887e37
 - name: ghcr.io/wodyd0103-byte/kopo14-web
   newName: ghcr.io/wodyd0103-byte/kopo14-web
-  newTag: ac1e9f1cc0abb643e5b8fd2ce891c59d58194f84
+  newTag: 27ec21ee97bff43625c4b16868c831ea4e887e37
