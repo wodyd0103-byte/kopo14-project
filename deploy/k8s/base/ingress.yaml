@@ -9,7 +9,20 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
+    # hosts 파일에 '127.0.0.1 kopo14.local'을 넣었을 때 쓰는 이름
     - host: kopo14.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kopo14-web
+                port:
+                  name: http
+    # hosts를 건드리지 않고 바로 열어 보기 위한 이름.
+    # 관리자 권한이 필요 없어서 로컬 확인에는 이쪽이 편하다.
+    - host: localhost
       http:
         paths:
           - path: /

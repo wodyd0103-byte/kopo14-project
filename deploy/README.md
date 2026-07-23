@@ -38,23 +38,33 @@ git 저장소가 정하고, ArgoCD는 그 차이를 계속 메웁니다. 이게 
 kubectl get nodes
 ```
 
-`docker-desktop  Ready` 가 나오면 됩니다.
+`desktop-control-plane  Ready` 가 나오면 됩니다.
+
+> `kubectl`을 못 찾는다고 나오면 **터미널을 새로 여세요.** 설치하면서 추가된 PATH가
+> 이미 열려 있던 창에는 반영되지 않습니다. 그래도 안 되면 경로를 직접 씁니다:
+> `$env:Path += ";C:\Program Files\Docker\Docker\resources\bin"`
 
 ### 2. Ingress 컨트롤러
 
 바깥에서 들어오는 요청을 받아 줄 문지기입니다.
 
 ```powershell
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.11.3/deploy/static/provider/cloud/deploy.yaml
-kubectl -n ingress-nginx wait --for=condition=ready pod -l app.kubernetes.io/component=controller --timeout=180s
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.15.1/deploy/static/provider/cloud/deploy.yaml
+kubectl -n ingress-nginx wait --for=condition=ready pod -l app.kubernetes.io/component=controller --timeout=240s
 ```
+
+컨트롤러 Service의 `EXTERNAL-IP`는 계속 `<pending>`으로 남습니다. 정상입니다 —
+아래 '접속하기'에서 설명합니다.
 
 ### 3. ArgoCD
 
+`--server-side`가 **필요합니다.** 그냥 `apply` 하면 ArgoCD의 CRD 하나가
+너무 커서 `metadata.annotations: Too long` 오류로 설치가 깨집니다.
+
 ```powershell
 kubectl create namespace argocd
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-kubectl -n argocd wait --for=condition=available deployment --all --timeout=300s
+kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+kubectl -n argocd wait --for=condition=available deployment --all --timeout=420s
 ```
 
 초기 비밀번호(아이디는 `admin`)를 확인합니다.
@@ -72,14 +82,36 @@ kubectl -n argocd port-forward svc/argocd-server 8080:443
 
 → https://localhost:8080 (자체 서명 인증서라 경고가 뜹니다. 무시하고 진행)
 
-### 4. hosts 파일
+### 4. 접속하기 (port-forward)
 
-`kopo14.local`이 내 PC를 가리키게 합니다. **관리자 권한** 메모장으로
-`C:\Windows\System32\drivers\etc\hosts`를 열어 맨 아래에 추가합니다.
+요즘 Docker Desktop의 쿠버네티스는 kind 기반이라 **LoadBalancer를 처리해 줄
+주체가 없습니다.** 그래서 Ingress 컨트롤러의 `EXTERNAL-IP`가 영영 `<pending>`이고,
+그냥 두면 브라우저에서 닿지 않습니다. port-forward로 길을 뚫습니다.
+
+```powershell
+kubectl -n ingress-nginx port-forward svc/ingress-nginx-controller 8080:80
+```
+
+**이 창은 켜 둔 채로 두세요.** 닫으면 접속이 끊깁니다.
+
+→ http://localhost:8080
+
+80번이 아니라 8080인 이유는, 윈도우에서 80번을 `System`(HTTP.sys)이 예약해 두어
+바인딩이 거부되기 때문입니다. 확인해 보려면:
+
+```powershell
+Get-NetTCPConnection -State Listen -LocalPort 80 | Select-Object LocalAddress,OwningProcess
+```
+
+`kopo14.local`이라는 이름으로 열고 싶다면 **관리자 권한** 메모장으로
+`C:\Windows\System32\drivers\etc\hosts`에 아래를 추가하세요. Ingress에 두 이름이
+모두 등록돼 있어 어느 쪽으로 열어도 됩니다.
 
 ```
 127.0.0.1 kopo14.local
 ```
+
+→ http://kopo14.local:8080
 
 ---
 
@@ -140,7 +172,16 @@ kubectl apply -n argocd -f deploy/argocd/application.yaml
 kubectl -n kopo14 get pod,svc,ingress,pvc
 ```
 
-전부 `Running`이 되면 브라우저에서 http://kopo14.local 을 엽니다.
+파드 3개가 `Running`, PVC가 `Bound`가 되면 브라우저에서 http://localhost:8080 을 엽니다.
+(위의 port-forward 창이 켜져 있어야 합니다)
+
+ArgoCD가 보는 상태는 이렇게 확인합니다.
+
+```powershell
+kubectl -n argocd get application kopo14
+```
+
+`SYNC STATUS=Synced`, `HEALTH STATUS=Healthy` 면 정상입니다.
 
 ---
 
