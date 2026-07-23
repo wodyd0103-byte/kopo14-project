@@ -145,11 +145,18 @@ kubectl -n ingress-nginx port-forward svc/ingress-nginx-controller 8080:80 --add
 **(2) 방화벽에서 8080 인바운드 허용** — **관리자 권한 PowerShell**에서 한 번만
 
 ```powershell
-New-NetFirewallRule -DisplayName "kopo14 (8080)" -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow -Profile Private
+New-NetFirewallRule -DisplayName "kopo14 (8080)" -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow -Profile Any -RemoteAddress LocalSubnet
 ```
 
-`-Profile Private`이라 사설망에서만 열립니다. 공용 와이파이에서는 열리지 않습니다.
-나중에 닫으려면:
+`-RemoteAddress LocalSubnet`이 핵심입니다. **같은 서브넷에서 오는 요청만** 받습니다.
+프로필로 거르지 않는 이유는, 회사·학교 네트워크에서는 이더넷이 `Public`으로 잡히는
+일이 흔해서 `-Profile Private`으로 만든 규칙이 적용되지 않기 때문입니다. 확인:
+
+```powershell
+Get-NetConnectionProfile | Select-Object InterfaceAlias, NetworkCategory
+```
+
+다 쓰고 나면 닫아 두세요.
 
 ```powershell
 Remove-NetFirewallRule -DisplayName "kopo14 (8080)"
