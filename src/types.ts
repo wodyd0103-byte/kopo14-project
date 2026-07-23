@@ -23,6 +23,11 @@ export interface Restaurant {
   image: string
   link: string // 홈페이지·SNS 주소 (네이버 지역검색이 알려주는 값)
   menu: MenuItem[]
+  // 등록한 사람이 그 가게에서 먹어 본 음식.
+  // menu가 '가게에 이런 게 판다'는 가격표라면, 이쪽은 '내가 이걸 먹었다'는 기록이다.
+  // 네이버가 메뉴를 API로 주지 않아 menu는 대부분 비어 있는데, 이건 실제로 먹은 것이라
+  // 채워질수록 그 자체가 쓸모 있는 메뉴 목록이 된다.
+  ate?: string[]
   isFavorite: boolean
   ownerId?: number | null // 등록자 user id (없으면 공용/레거시 데이터)
   ownerName?: string // 등록자 닉네임 (표시용)

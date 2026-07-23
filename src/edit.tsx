@@ -7,6 +7,7 @@ import type { MenuItem } from './types'
 import DeleteRestaurant from './delete'
 import ImageInput from './image-input'
 import MenuEditor from './menu-editor'
+import AteEditor from './ate-editor'
 import LoginForm from './login-form'
 
 type FormState = {
@@ -19,6 +20,7 @@ type FormState = {
   image: string
   link: string
   menu: MenuItem[]
+  ate: string[]
 }
 
 const EMPTY_FORM: FormState = {
@@ -31,6 +33,7 @@ const EMPTY_FORM: FormState = {
   image: '',
   link: '',
   menu: [],
+  ate: [],
 }
 
 // 수정 페이지(/edit/:id): useParams로 대상 id를 읽어 기존 항목을 수정/삭제
@@ -58,6 +61,7 @@ function EditRestaurant() {
         image: restaurant.image,
         link: restaurant.link ?? '',
         menu: restaurant.menu ?? [],
+        ate: restaurant.ate ?? [],
       })
     }
   }, [restaurant])
@@ -89,6 +93,7 @@ function EditRestaurant() {
       menu: form.menu
         .map((row) => ({ name: row.name.trim(), price: row.price.trim() }))
         .filter((row) => row.name !== ''),
+      ate: form.ate,
     }
 
     try {
@@ -185,6 +190,11 @@ function EditRestaurant() {
       </label>
 
       <ImageInput value={form.image} onChange={handleChange} />
+
+      <AteEditor
+        ate={form.ate}
+        onChange={(ate) => setForm((prev) => ({ ...prev, ate }))}
+      />
 
       <MenuEditor
         menu={form.menu}

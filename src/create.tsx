@@ -4,6 +4,7 @@ import { API_URL } from './types'
 import { useAuth } from './auth-context'
 import ImageInput from './image-input'
 import MenuEditor from './menu-editor'
+import AteEditor from './ate-editor'
 import PlaceSearch, { type SelectedPlace } from './place-search'
 import LoginForm from './login-form'
 
@@ -22,6 +23,7 @@ type FormState = {
   image: string
   link: string
   menu: MenuItem[]
+  ate: string[]
   location: LatLng | null
 }
 
@@ -35,6 +37,7 @@ const EMPTY_FORM: FormState = {
   image: '',
   link: '',
   menu: [],
+  ate: [],
   location: null,
 }
 
@@ -79,11 +82,16 @@ function CreateRestaurant({ onCreated, onClose }: Props) {
     if (submitting) return
     setSubmitting(true)
 
+    // 설명을 굳이 안 적어도 상세 화면이 휑하지 않도록, 비어 있으면 누가 다녀온
+    // 곳인지로 채운다. 직접 쓴 설명이 있으면 그대로 둔다.
+    const description =
+      form.description.trim() || `${user.nickname}님이 가본 가게`
+
     // 신규 등록: 평점/리뷰수는 0, 찜은 false로 시작, 등록자는 현재 로그인 사용자
     const payload: Omit<Restaurant, 'id'> = {
       name: form.name.trim(),
       category: form.category.trim(),
-      description: form.description.trim(),
+      description,
       address: form.address.trim(),
       location: form.location,
       phone: form.phone.trim() === '' ? null : form.phone.trim(),
@@ -94,6 +102,7 @@ function CreateRestaurant({ onCreated, onClose }: Props) {
       menu: form.menu
         .map((row) => ({ name: row.name.trim(), price: row.price.trim() }))
         .filter((row) => row.name !== ''),
+      ate: form.ate,
       rating: 0,
       reviewCount: 0,
       isFavorite: false,
@@ -145,6 +154,7 @@ function CreateRestaurant({ onCreated, onClose }: Props) {
           name="description"
           value={form.description}
           onChange={handleChange}
+          placeholder={`비워 두면 '${user.nickname}님이 가본 가게'로 들어갑니다`}
         />
       </label>
       <label>
@@ -165,6 +175,11 @@ function CreateRestaurant({ onCreated, onClose }: Props) {
       </label>
 
       <ImageInput value={form.image} onChange={handleChange} />
+
+      <AteEditor
+        ate={form.ate}
+        onChange={(ate) => setForm((prev) => ({ ...prev, ate }))}
+      />
 
       <MenuEditor
         menu={form.menu}

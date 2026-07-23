@@ -157,6 +157,18 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
           </p>
         )}
 
+        {/* 먹어 본 음식 — 메뉴판은 비어 있어도 이건 실제 기록이라 대개 채워져 있다 */}
+        {restaurant.ate && restaurant.ate.length > 0 && (
+          <>
+            <h3>먹어 본 음식</h3>
+            <ul className="ate-list">
+              {restaurant.ate.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </>
+        )}
+
         {/* 메뉴 — 직접 적어 둔 것만 표시 */}
         {restaurant.menu && restaurant.menu.length > 0 && (
           <>
