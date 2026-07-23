@@ -1161,15 +1161,59 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .login-form.flash input {
+  .login-form.flash input,
+  .login-toggle.flash {
     animation: none;
     border-color: var(--accent);
   }
 }
 
+/* ---- 좁은 화면: 평소엔 이 버튼만, 누르면 폼이 펼쳐진다 ----
+   입력칸을 늘 펼쳐 두면 제목과 자리를 다퉈 헤더가 좁아 보인다.
+   (접는 폭은 login-form.tsx의 NARROW_QUERY와 같은 값이어야 한다) */
+.login-toggle {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.login-toggle:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.login-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* 접힌 채로 쓰기 버튼을 눌렀을 때 — 펼쳐지기 전 한순간에도 눈에 띄게 */
+.login-toggle.flash {
+  animation: login-flash 1.2s ease-out;
+}
+
 @media (max-width: 480px) {
+  /* 펼치면 바에 혼자 남으므로 폭을 넉넉히 쓴다 */
+  .login-form.bar {
+    flex: 1;
+  }
+
+  .login-form.bar .login-row {
+    width: 100%;
+  }
+
   .login-form.bar input {
-    width: 96px;
+    flex: 1;
+    min-width: 0;
+    /* 16px 미만이면 모바일 사파리가 입력할 때 화면을 확대해 버린다 */
+    font-size: 16px;
   }
 }
 
