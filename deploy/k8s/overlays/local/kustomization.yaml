@@ -4,12 +4,14 @@ kind: Kustomization
 namespace: kopo14
 
 resources:
-  - ../../base
+- ../../base
 
 # 이 태그를 GitHub Actions가 커밋으로 바꾼다. ArgoCD는 그 커밋을 보고 배포한다.
 # 여기가 GitOps의 핵심 — 배포는 kubectl이 아니라 git 커밋으로 일어난다.
 images:
-  - name: ghcr.io/wodyd0103-byte/kopo14-web
-    newTag: latest
-  - name: ghcr.io/wodyd0103-byte/kopo14-api
-    newTag: latest
+- name: ghcr.io/wodyd0103-byte/kopo14-api
+  newName: ghcr.io/wodyd0103-byte/kopo14-api
+  newTag: f2044872cbf3c82bd324a88d27c399535f9a5cde
+- name: ghcr.io/wodyd0103-byte/kopo14-web
+  newName: ghcr.io/wodyd0103-byte/kopo14-web
+  newTag: f2044872cbf3c82bd324a88d27c399535f9a5cde
