@@ -7,7 +7,7 @@ import type { MenuItem } from './types'
 import DeleteRestaurant from './delete'
 import ImageInput from './image-input'
 import MenuEditor from './menu-editor'
-import LoginRequired from './login-required'
+import LoginForm from './login-form'
 
 type FormState = {
   name: string
@@ -122,7 +122,10 @@ function EditRestaurant() {
   if (!user) {
     return (
       <div className="edit-page">
-        <LoginRequired action="음식점을 수정하려면" />
+        <LoginForm
+          variant="panel"
+          note="음식점을 수정하려면 닉네임을 입력해 주세요."
+        />
         <Link to="/">홈으로</Link>
       </div>
     )

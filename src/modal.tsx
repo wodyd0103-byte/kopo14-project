@@ -12,7 +12,7 @@ import { useRestaurants } from './restaurant-context'
 import { formatRating } from './stats'
 import { LikeButton } from './like'
 import DeleteRestaurant from './delete'
-import LoginRequired from './login-required'
+import LoginForm from './login-form'
 
 interface Props {
   restaurant: Restaurant
@@ -212,9 +212,10 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
           ))}
         </ul>
 
-        {/* 평점·리뷰 작성 폼 — 둘러보는 중에는 폼 대신 로그인 안내를 놓는다 */}
+        {/* 평점·리뷰 작성 폼 — 로그인 전에는 그 자리에서 바로 로그인할 수 있게 한다.
+            모달을 닫고 헤더로 올라갔다 오게 만들 이유가 없다. */}
         {!user ? (
-          <LoginRequired action="리뷰를 남기려면" />
+          <LoginForm variant="panel" note="리뷰를 남기려면 닉네임을 입력해 주세요." />
         ) : (
         <form className="review-form" onSubmit={handleSubmit}>
           <h4>리뷰 작성</h4>

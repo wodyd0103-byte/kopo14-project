@@ -1,7 +1,7 @@
 import { Routes, Route, Link } from "react-router-dom";
 import { useAuth } from "./auth-context";
 import RestaurantProvider from "./store";
-import Login from "./login";
+import LoginForm from "./login-form";
 import Home from "./home";
 import Category from "./category";
 import Best from "./best";
@@ -10,17 +10,15 @@ import EditRestaurant from "./edit";
 import NotFound from "./notfound";
 import "./App.css";
 
-// App은 로직 없이 로그인 게이트 + Provider + 셸 + 라우팅 연결만 담당
+// App은 로직 없이 Provider + 셸 + 라우팅 연결만 담당
 function App() {
-  const { user, guest, logout, requireLogin } = useAuth();
-
-  // 로그인도 안 했고 둘러보기도 고르지 않았을 때만 로그인 화면을 보여준다.
-  // 둘러보기 중에는 읽기는 다 되고, 쓰는 동작에서만 requireLogin이 여기로 되돌린다.
-  if (!user && !guest) return <Login />;
+  const { user, logout } = useAuth();
 
   return (
     <RestaurantProvider>
       <div className="app">
+        {/* 로그인은 화면을 막지 않는다. 목록은 누구에게나 보이고,
+            여기 구석의 입력칸은 '쓰려면' 필요할 때만 눈에 들어오면 된다. */}
         <div className="user-bar">
           {user ? (
             <>
@@ -30,12 +28,7 @@ function App() {
               </button>
             </>
           ) : (
-            <>
-              <span className="user-name guest">👀 둘러보는 중</span>
-              <button type="button" className="logout-btn" onClick={requireLogin}>
-                로그인
-              </button>
-            </>
+            <LoginForm variant="bar" />
           )}
         </div>
 

@@ -4,6 +4,7 @@ import type { Like, Restaurant, Review } from './types'
 import { API_URL } from './types'
 import { useAuth } from './auth-context'
 import { RestaurantContext } from './restaurant-context'
+import { focusLoginForm } from './login-focus'
 import { applyLikes, applyReviewStats, statsOf } from './stats'
 
 interface Props {
@@ -13,7 +14,7 @@ interface Props {
 // 음식점 + 리뷰 + 좋아요 상태 관리 Provider
 // 평점/리뷰수는 reviews에서, 좋아요 개수/내 좋아요는 likes에서 매번 계산해 내려준다.
 function RestaurantProvider({ children }: Props) {
-  const { user, requireLogin } = useAuth()
+  const { user } = useAuth()
   const [rawRestaurants, setRawRestaurants] = useState<Restaurant[]>([])
   const [reviews, setReviews] = useState<Review[]>([])
   const [likes, setLikes] = useState<Like[]>([])
@@ -57,11 +58,11 @@ function RestaurantProvider({ children }: Props) {
     [rawRestaurants, reviews, likes, user],
   )
 
-  // 쓰는 동작은 전부 여기를 지난다. 로그인 안 했으면 로그인 화면을 띄우고 막는다.
+  // 쓰는 동작은 전부 여기를 지난다. 로그인 안 했으면 막고 로그인 폼으로 시선을 옮긴다.
   // 화면에서도 버튼을 감추지만, 그건 안내일 뿐이고 실제 차단은 이 한 곳에서 한다.
   const ensureLogin = () => {
     if (user) return true
-    requireLogin()
+    focusLoginForm()
     return false
   }
 
