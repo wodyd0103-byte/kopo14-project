@@ -24,10 +24,18 @@ function Category() {
     setParams(next)
   }
 
-  // 데이터에 존재하는 카테고리 목록 (+ 전체)
+  // 데이터에 존재하는 카테고리 목록 (+ 전체).
+  // 개수를 함께 보여 준다. 눌러 보고 나서야 한 곳뿐인 걸 아는 것보다 낫다.
+  const counts = new Map<string, number>()
+  for (const r of restaurants) {
+    counts.set(r.category, (counts.get(r.category) ?? 0) + 1)
+  }
+
   const categories = [
-    '전체',
-    ...Array.from(new Set(restaurants.map((r) => r.category))),
+    { name: '전체', count: restaurants.length },
+    ...Array.from(counts, ([name, count]) => ({ name, count })).sort(
+      (a, b) => b.count - a.count || a.name.localeCompare(b.name, 'ko'),
+    ),
   ]
 
   const filtered =
@@ -42,17 +50,16 @@ function Category() {
       <div className="category-filter">
         {categories.map((c) => (
           <button
-            key={c}
+            key={c.name}
             type="button"
-            className={selectedCategory === c ? 'active' : ''}
-            onClick={() => setSelectedCategory(c)}
+            className={selectedCategory === c.name ? 'active' : ''}
+            onClick={() => setSelectedCategory(c.name)}
           >
-            {c}
+            {c.name}
+            <span className="category-count">{c.count}</span>
           </button>
         ))}
       </div>
-
-      <p className="result-count">{filtered.length}곳</p>
 
       <RestaurantList
         restaurants={filtered}
