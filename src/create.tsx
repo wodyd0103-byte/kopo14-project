@@ -5,6 +5,7 @@ import { useAuth } from './auth-context'
 import ImageInput from './image-input'
 import MenuEditor from './menu-editor'
 import PlaceSearch, { type SelectedPlace } from './place-search'
+import LoginRequired from './login-required'
 
 interface Props {
   onCreated: (restaurant: Restaurant) => void
@@ -42,6 +43,9 @@ function CreateRestaurant({ onCreated, onClose }: Props) {
   const { user } = useAuth()
   const [form, setForm] = useState<FormState>(EMPTY_FORM)
   const [submitting, setSubmitting] = useState(false)
+
+  // 등록한 사람이 누구인지 남겨야 나중에 본인만 수정할 수 있다
+  if (!user) return <LoginRequired action="음식점을 등록하려면" />
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,

@@ -3,7 +3,7 @@ import { useAuth } from './auth-context'
 
 // 로그인 화면 — 닉네임을 입력하면 앱으로 들어간다
 function Login() {
-  const { login } = useAuth()
+  const { login, browseAsGuest } = useAuth()
   const [nickname, setNickname] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
@@ -43,6 +43,11 @@ function Login() {
             {submitting ? '들어가는 중…' : '시작하기'}
           </button>
         </form>
+
+        {/* 로그인 없이도 목록과 리뷰를 읽을 수 있다. 쓰는 동작에서만 로그인을 묻는다. */}
+        <button type="button" className="guest-link" onClick={browseAsGuest}>
+          로그인 없이 둘러보기 →
+        </button>
       </div>
     </div>
   )

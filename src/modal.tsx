@@ -12,6 +12,7 @@ import { useRestaurants } from './restaurant-context'
 import { formatRating } from './stats'
 import { LikeButton } from './like'
 import DeleteRestaurant from './delete'
+import LoginRequired from './login-required'
 
 interface Props {
   restaurant: Restaurant
@@ -36,8 +37,10 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
   const [form, setForm] = useState<ReviewForm>(EMPTY_REVIEW)
   const [submitting, setSubmitting] = useState(false)
 
-  // 등록자 본인만 수정·삭제 (등록자 정보가 없는 공용/레거시 데이터는 누구나 가능)
-  const canManage = !restaurant.ownerId || restaurant.ownerId === user?.id
+  // 등록자 본인만 수정·삭제 (등록자 정보가 없는 공용/레거시 데이터는 로그인한 사람이면 가능).
+  // user를 먼저 확인하지 않으면, 둘러보는 사람에게도 ownerId 없는 옛 데이터가 열린다.
+  const canManage =
+    !!user && (!restaurant.ownerId || restaurant.ownerId === user.id)
 
   const reviews = useMemo(
     () => allReviews.filter((v) => v.restaurantId === restaurant.id),
@@ -194,20 +197,25 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
             <li key={review.id} className="review-item">
               <p className="review-head">
                 <b>{review.author}</b> ⭐ {review.rating} · {review.date}
-                <button
-                  type="button"
-                  className="review-delete"
-                  onClick={() => handleDeleteReview(review)}
-                >
-                  삭제
-                </button>
+                {user && (
+                  <button
+                    type="button"
+                    className="review-delete"
+                    onClick={() => handleDeleteReview(review)}
+                  >
+                    삭제
+                  </button>
+                )}
               </p>
               <p className="review-comment">{review.comment}</p>
             </li>
           ))}
         </ul>
 
-        {/* 평점·리뷰 작성 폼 */}
+        {/* 평점·리뷰 작성 폼 — 둘러보는 중에는 폼 대신 로그인 안내를 놓는다 */}
+        {!user ? (
+          <LoginRequired action="리뷰를 남기려면" />
+        ) : (
         <form className="review-form" onSubmit={handleSubmit}>
           <h4>리뷰 작성</h4>
           <input
@@ -238,6 +246,7 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
             {submitting ? '등록 중…' : '리뷰 등록'}
           </button>
         </form>
+        )}
       </div>
     </div>
   )

@@ -7,6 +7,7 @@ import type { MenuItem } from './types'
 import DeleteRestaurant from './delete'
 import ImageInput from './image-input'
 import MenuEditor from './menu-editor'
+import LoginRequired from './login-required'
 
 type FormState = {
   name: string
@@ -117,8 +118,18 @@ function EditRestaurant() {
     )
   }
 
+  // 주소를 직접 치고 들어온 경우까지 막는다
+  if (!user) {
+    return (
+      <div className="edit-page">
+        <LoginRequired action="음식점을 수정하려면" />
+        <Link to="/">홈으로</Link>
+      </div>
+    )
+  }
+
   // 등록자 본인만 수정 가능 (등록자 정보가 없는 공용/레거시 데이터는 허용)
-  const canManage = !restaurant.ownerId || restaurant.ownerId === user?.id
+  const canManage = !restaurant.ownerId || restaurant.ownerId === user.id
   if (!canManage) {
     return (
       <div className="edit-page">

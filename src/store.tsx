@@ -13,7 +13,7 @@ interface Props {
 // 음식점 + 리뷰 + 좋아요 상태 관리 Provider
 // 평점/리뷰수는 reviews에서, 좋아요 개수/내 좋아요는 likes에서 매번 계산해 내려준다.
 function RestaurantProvider({ children }: Props) {
-  const { user } = useAuth()
+  const { user, requireLogin } = useAuth()
   const [rawRestaurants, setRawRestaurants] = useState<Restaurant[]>([])
   const [reviews, setReviews] = useState<Review[]>([])
   const [likes, setLikes] = useState<Like[]>([])
@@ -57,6 +57,14 @@ function RestaurantProvider({ children }: Props) {
     [rawRestaurants, reviews, likes, user],
   )
 
+  // 쓰는 동작은 전부 여기를 지난다. 로그인 안 했으면 로그인 화면을 띄우고 막는다.
+  // 화면에서도 버튼을 감추지만, 그건 안내일 뿐이고 실제 차단은 이 한 곳에서 한다.
+  const ensureLogin = () => {
+    if (user) return true
+    requireLogin()
+    return false
+  }
+
   // 계산된 평점/리뷰수를 음식점 레코드에도 저장 (db.json이 리뷰와 어긋나지 않도록)
   const persistStats = async (restaurantId: number, nextReviews: Review[]) => {
     await fetch(`${API_URL}/restaurants/${restaurantId}`, {
@@ -68,6 +76,7 @@ function RestaurantProvider({ children }: Props) {
 
   // 찜 (전역 PATCH) → 재조회로 최신 상태 반영
   const toggleFavorite = async (restaurant: Restaurant) => {
+    if (!ensureLogin()) return
     await fetch(`${API_URL}/restaurants/${restaurant.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
@@ -78,7 +87,7 @@ function RestaurantProvider({ children }: Props) {
 
   // 사용자별 좋아요 토글 — 이미 눌렀으면 내 like 행 삭제, 아니면 새로 추가
   const toggleLike = async (restaurant: Restaurant) => {
-    if (!user) return
+    if (!ensureLogin() || !user) return
     const mine = likes.find(
       (l) => l.restaurantId === restaurant.id && l.userId === user.id,
     )
@@ -96,6 +105,7 @@ function RestaurantProvider({ children }: Props) {
 
   // 리뷰 등록 (POST) → 재조회 → 해당 음식점 평점/리뷰수 갱신
   const addReview = async (review: Omit<Review, 'id'>) => {
+    if (!ensureLogin()) return
     const res = await fetch(`${API_URL}/reviews`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -109,6 +119,7 @@ function RestaurantProvider({ children }: Props) {
 
   // 리뷰 삭제 (DELETE) → 재조회 → 해당 음식점 평점/리뷰수 갱신
   const removeReview = async (review: Review) => {
+    if (!ensureLogin()) return
     const res = await fetch(`${API_URL}/reviews/${review.id}`, {
       method: 'DELETE',
     })
