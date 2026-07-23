@@ -1,0 +1,16 @@
+node_modules
+dist
+.git
+.github
+.env
+*.local
+*.log
+
+# 이미지 안에서 쓰지 않는 것들
+.claude
+.bkit
+.omc
+deploy/k8s
+deploy/argocd
+scripts/fill-info-report.json
+README.md

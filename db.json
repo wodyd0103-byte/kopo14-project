@@ -1,0 +1,667 @@
+{
+  "categories": [
+    "한식",
+    "일식",
+    "패스트푸드",
+    "미분류"
+  ],
+  "restaurants": [
+    {
+      "id": 1,
+      "name": "서현칼국수",
+      "category": "한식",
+      "description": "",
+      "address": "경기도 성남시 분당구 황새울로335번길 8 덕산빌딩 2층 201호, 203호",
+      "location": {
+        "lat": 37.3865904,
+        "lng": 127.1221409
+      },
+      "rating": 4,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://d12zq4w4guyljn.cloudfront.net/750_750_20231029043756_photo1_5a0f3a4d7b37.webp",
+      "isFavorite": false,
+      "link": "https://www.instagram.com/skb202510",
+      "menu": []
+    },
+    {
+      "id": 2,
+      "name": "바삭돈카츠 서현점",
+      "category": "일식",
+      "description": "",
+      "address": "경기도 성남시 분당구 분당로53번길 14 109, 110, 111호",
+      "location": {
+        "lat": 37.3838003,
+        "lng": 127.1223372
+      },
+      "rating": 5,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://ldb-phinf.pstatic.net/20230529_4/1685323649068KbAi7_JPEG/1685323629446.jpg",
+      "isFavorite": false,
+      "link": "",
+      "menu": []
+    },
+    {
+      "id": 3,
+      "name": "미도인 서현",
+      "category": "양식",
+      "description": "",
+      "address": "경기도 성남시 분당구 분당로53번길 10 동호플라자 2층 202호",
+      "location": {
+        "lat": 37.3834832,
+        "lng": 127.1217327
+      },
+      "rating": 4,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://pup-post-phinf.pstatic.net/MjAyNjA0MThfMjU0/MDAxNzc2NDc4ODEzMjgz.XLEVAfsZrtwecScxPebz7yNttA5wDoNPNpIHdX30qkcg.FVUsMTa07gj9PQv76JCAi7ZTZ4UW3FdopD05Si9vFsgg.JPEG/PostEncodingTask.3690D4AA-DDA1-45F1-BA7E-7054B5566889.jpg",
+      "isFavorite": false,
+      "link": "",
+      "menu": []
+    },
+    {
+      "id": 4,
+      "name": "서현 순대",
+      "category": "한식",
+      "description": "",
+      "address": "경기도 성남시 분당구 서현로180번길 19 1층",
+      "location": {
+        "lat": 37.3874381,
+        "lng": 127.1228863
+      },
+      "rating": 5,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://ldb-phinf.pstatic.net/20210627_86/1624803543874tprRp_JPEG/vpam08lgYHPnnqA22ZxSrguB.JPG.jpg",
+      "isFavorite": false,
+      "link": "https://blog.naver.com/xsx528",
+      "menu": []
+    },
+    {
+      "id": 5,
+      "name": "진우동",
+      "category": "일식",
+      "description": "",
+      "address": "경기도 성남시 분당구 황새울로335번길 8 덕산빌딩",
+      "location": {
+        "lat": 37.38653,
+        "lng": 127.1220299
+      },
+      "rating": 4,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://d2uja84sd90jmv.cloudfront.net/posts/lGXOf3AYBU2gYaaAhUs00A/ms.jpg",
+      "isFavorite": false,
+      "link": "",
+      "menu": []
+    },
+    {
+      "id": 6,
+      "name": "우체국 구내식당",
+      "category": "한식",
+      "description": "분당우체국 건물 안 구내식당",
+      "address": "경기도 성남시 분당구 황새울로 347",
+      "location": {
+        "lat": 37.3868389,
+        "lng": 127.1232171
+      },
+      "rating": 5,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "",
+      "isFavorite": true,
+      "link": "",
+      "menu": []
+    },
+    {
+      "id": 7,
+      "name": "ak프라자 구내식당",
+      "category": "한식",
+      "description": "AK플라자 분당점 건물 안 구내식당",
+      "address": "경기도 성남시 분당구 황새울로360번길 42",
+      "location": {
+        "lat": 37.3850444,
+        "lng": 127.1236884
+      },
+      "rating": 3,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "",
+      "isFavorite": false,
+      "link": "",
+      "menu": []
+    },
+    {
+      "id": 8,
+      "name": "서보 분당점",
+      "category": "태국음식",
+      "description": "",
+      "address": "경기도 성남시 분당구 황새울로 325 1층 109호",
+      "location": {
+        "lat": 37.3857319,
+        "lng": 127.121503
+      },
+      "rating": 5,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://ldb-phinf.pstatic.net/20260614_51/1781440416554zXS2A_JPEG/IMG_2569.jpg",
+      "isFavorite": false,
+      "link": "",
+      "menu": []
+    },
+    {
+      "id": 9,
+      "name": "장원막국수",
+      "category": "한식",
+      "description": "",
+      "address": "경기도 성남시 분당구 황새울로319번길 8-4 1층",
+      "location": {
+        "lat": 37.3856526,
+        "lng": 127.1209186
+      },
+      "rating": 3,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://d2uja84sd90jmv.cloudfront.net/posts/Czm7aU1Xhc_DrGQ4OhXKow/ms.jpg",
+      "isFavorite": false,
+      "link": "",
+      "menu": []
+    },
+    {
+      "id": 10,
+      "name": "온담 숯불국수 서현",
+      "category": "한식",
+      "description": "",
+      "address": "경기도 성남시 분당구 황새울로330번길 18 1층",
+      "location": {
+        "lat": 37.3845728,
+        "lng": 127.1214463
+      },
+      "rating": 5,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://ldb-phinf.pstatic.net/20260423_58/1776918015368QQFp3_JPEG/KakaoTalk_20260423_130910014.jpg",
+      "isFavorite": false,
+      "link": "https://www.instagram.com/ondam.guksu/",
+      "menu": []
+    },
+    {
+      "id": 11,
+      "name": "에도마에텐동하마다 서현점",
+      "category": "일식",
+      "description": "",
+      "address": "경기도 성남시 분당구 분당로53번길 10 동호플라자 201호",
+      "location": {
+        "lat": 37.3835251,
+        "lng": 127.121781
+      },
+      "rating": 3,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://d2uja84sd90jmv.cloudfront.net/posts/1_t0XHUfd4ImfYXmceqn0Q/ms.jpg?updated=-62167392000",
+      "isFavorite": false,
+      "link": "",
+      "menu": []
+    },
+    {
+      "id": 12,
+      "name": "롯데리아 분당 서현점",
+      "category": "패스트푸드",
+      "description": "",
+      "address": "경기도 성남시 분당구 분당로53번길 9 1층 110호",
+      "location": {
+        "lat": 37.3838351,
+        "lng": 127.1215394
+      },
+      "rating": 4,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://d12zq4w4guyljn.cloudfront.net/20240219065956224_photo_533c6cd51e0c.webp",
+      "isFavorite": false,
+      "link": "https://www.lotteria.com/",
+      "menu": []
+    },
+    {
+      "id": 13,
+      "name": "25시 병천순대국",
+      "category": "한식",
+      "description": "",
+      "address": "경기도 성남시 분당구 분당로53번길 15",
+      "location": {
+        "lat": 37.38439,
+        "lng": 127.1218916
+      },
+      "rating": 4,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://ldb-phinf.pstatic.net/20210607_59/1623071967780zSQwV_PNG/7YLBWZGvidDvaBixZD8KjEXW.png",
+      "isFavorite": false,
+      "link": "",
+      "menu": []
+    },
+    {
+      "id": 14,
+      "name": "153구포국수 분당서현역점",
+      "category": "한식",
+      "description": "",
+      "address": "경기도 성남시 분당구 분당로53번길 13 산호트윈스2 1층",
+      "location": {
+        "lat": 37.3841997,
+        "lng": 127.1217683
+      },
+      "rating": 5,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://ldb-phinf.pstatic.net/20240331_62/1711842994839BUDAr_JPEG/%B1%B9%BC%F6%B7%F9%C0%FC%C3%BC.jpg",
+      "isFavorite": false,
+      "link": "",
+      "menu": []
+    },
+    {
+      "id": 15,
+      "name": "미소야 분당서현점",
+      "category": "일식",
+      "description": "",
+      "address": "경기도 성남시 분당구 분당로53번길 13 산호트윈스2",
+      "location": {
+        "lat": 37.3840613,
+        "lng": 127.1218971
+      },
+      "rating": 3,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://pup-post-phinf.pstatic.net/MjAyNjAzMTlfODQg/MDAxNzczODc3MjE1Mzk4.wwnmMmg9HQ07y00aAYpC-d_hj6N4Iq7ZiNfTgSqDz-sg.hsYKtSuXhB7fKVWZAd7YPz4tNEawjZDvp5kXpvAKiVkg.JPEG/POST_IMAGE_ENCODING_20260319_084014_679.jpg",
+      "isFavorite": false,
+      "link": "https://blog.naver.com/misoya-official",
+      "menu": []
+    },
+    {
+      "id": 16,
+      "name": "kfc 서현역점",
+      "category": "패스트푸드",
+      "description": "",
+      "address": "경기도 성남시 분당구 분당로53번길 19",
+      "location": {
+        "lat": 37.3844237,
+        "lng": 127.1223018
+      },
+      "rating": 4,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/0a/18/a4/kfc.jpg?w=1600&h=1600&s=1",
+      "isFavorite": false,
+      "link": "https://www.kfckorea.com/",
+      "menu": []
+    },
+    {
+      "id": 17,
+      "name": "아비꼬 분당서현역점",
+      "category": "일식",
+      "description": "",
+      "address": "경기도 성남시 분당구 분당로53번길 15 205호",
+      "location": {
+        "lat": 37.3843561,
+        "lng": 127.1219843
+      },
+      "rating": 4,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://ldb-phinf.pstatic.net/20260512_213/17785759796206TEFk_JPEG/%C8%AD%C0%CC%C6%AE%C5%E6%BC%BF%B7%BA_402076_%BA%B8%C1%A42.jpg",
+      "isFavorite": false,
+      "link": "",
+      "menu": []
+    },
+    {
+      "id": 18,
+      "name": "깐깐 AK플라자 분당점",
+      "category": "베트남음식",
+      "description": "",
+      "address": "경기도 성남시 분당구 황새울로360번길 42 지하1층",
+      "location": {
+        "lat": 37.3854369,
+        "lng": 127.1235415
+      },
+      "rating": 3,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://ldb-phinf.pstatic.net/20250804_129/1754283008901oQde3_PNG/%BD%BA%C5%A9%B8%B0%BC%A6_2025-08-04_%BF%C0%C8%C4_1.49.58.png",
+      "isFavorite": false,
+      "link": "",
+      "menu": []
+    },
+    {
+      "id": 19,
+      "name": "더진국 서현점",
+      "category": "한식",
+      "description": "",
+      "address": "경기도 성남시 분당구 황새울로 337 1층 111호",
+      "location": {
+        "lat": 37.3863317,
+        "lng": 127.1226239
+      },
+      "rating": 5,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://image-logo.alba.kr/%2Fdata_image2%2Fcomlogo%2F202303%2F2023031012304287238_0_m.png",
+      "isFavorite": false,
+      "link": "",
+      "menu": []
+    },
+    {
+      "id": 20,
+      "name": "유타로 서현직영점",
+      "category": "일식",
+      "description": "",
+      "address": "경기도 성남시 분당구 황새울로335번길 8 덕산빌딩",
+      "location": {
+        "lat": 37.3866722,
+        "lng": 127.1222769
+      },
+      "rating": 3,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://ldb-phinf.pstatic.net/20260424_205/1777031093691C3HMD_JPEG/KakaoTalk_20260424_161300127.jpg",
+      "isFavorite": false,
+      "link": "https://www.instagram.com/utaro_ramen_official",
+      "menu": []
+    },
+    {
+      "id": 21,
+      "name": "하치로돈부리 서현본점",
+      "category": "일식",
+      "description": "",
+      "address": "경기도 성남시 분당구 분당로53번길 14 서현프라자",
+      "location": {
+        "lat": 37.3839073,
+        "lng": 127.122266
+      },
+      "rating": 4,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://ldb-phinf.pstatic.net/20260215_284/1771085994656XHJOf_PNG/%B0%ED%B7%CE%C4%C9%BB%F8%B7%AF%B5%E5.png",
+      "isFavorite": false,
+      "link": "https://www.instagram.com/hachiro_donburi?igsh=MWozamNtdXZ0Zjk2Ng==",
+      "menu": []
+    },
+    {
+      "id": 22,
+      "name": "신사골감자탕 서현점",
+      "category": "한식",
+      "description": "",
+      "address": "경기도 성남시 분당구 서현로 204",
+      "location": {
+        "lat": 37.386901,
+        "lng": 127.1251396
+      },
+      "rating": 5,
+      "reviewCount": 1,
+      "priceLevel": null,
+      "phone": null,
+      "hours": null,
+      "image": "https://ldb-phinf.pstatic.net/20260421_209/1776746384802isH9k_JPEG/%C8%B2%C5%C2%C7%D8%C0%E5%B1%B9.jpg",
+      "isFavorite": false,
+      "link": "https://www.sinsagol.com",
+      "menu": []
+    },
+    {
+      "name": "중화일상 서현점",
+      "category": "중식",
+      "description": "",
+      "address": "경기도 성남시 분당구 황새울로 315 1층",
+      "location": {
+        "lat": 37.3847098,
+        "lng": 127.1203571
+      },
+      "phone": null,
+      "hours": null,
+      "image": "",
+      "link": "",
+      "menu": [],
+      "rating": 0,
+      "reviewCount": 0,
+      "isFavorite": false,
+      "ownerId": 1,
+      "ownerName": "전재용",
+      "id": 23
+    }
+  ],
+  "reviews": [
+    {
+      "restaurantId": 14,
+      "author": "전재용",
+      "rating": 5,
+      "comment": "좋았음",
+      "date": "2026-07-22",
+      "id": 1
+    },
+    {
+      "restaurantId": 13,
+      "author": "전재용",
+      "rating": 4,
+      "comment": "보통",
+      "date": "2026-07-22",
+      "id": 2
+    },
+    {
+      "restaurantId": 19,
+      "author": "전재용",
+      "rating": 5,
+      "comment": "좋았음",
+      "date": "2026-07-22",
+      "id": 3
+    },
+    {
+      "restaurantId": 12,
+      "author": "전재용",
+      "rating": 4,
+      "comment": "보통",
+      "date": "2026-07-22",
+      "id": 4
+    },
+    {
+      "restaurantId": 18,
+      "author": "전재용",
+      "rating": 3,
+      "comment": "아쉬움",
+      "date": "2026-07-22",
+      "id": 5
+    },
+    {
+      "restaurantId": 3,
+      "author": "전재용",
+      "rating": 4,
+      "comment": "비쌈",
+      "date": "2026-07-22",
+      "id": 6
+    },
+    {
+      "restaurantId": 15,
+      "author": "전재용",
+      "rating": 3,
+      "comment": "아쉬움",
+      "date": "2026-07-22",
+      "id": 7
+    },
+    {
+      "restaurantId": 2,
+      "author": "전재용",
+      "rating": 5,
+      "comment": "맛있음",
+      "date": "2026-07-22",
+      "id": 8
+    },
+    {
+      "restaurantId": 8,
+      "author": "전재용",
+      "rating": 5,
+      "comment": "맛있음",
+      "date": "2026-07-22",
+      "id": 9
+    },
+    {
+      "restaurantId": 4,
+      "author": "전재용",
+      "rating": 5,
+      "comment": "맛있음",
+      "date": "2026-07-22",
+      "id": 10
+    },
+    {
+      "restaurantId": 1,
+      "author": "전재용",
+      "rating": 4,
+      "comment": "맛있음",
+      "date": "2026-07-22",
+      "id": 11
+    },
+    {
+      "restaurantId": 22,
+      "author": "전재용",
+      "rating": 5,
+      "comment": "맛있음",
+      "date": "2026-07-22",
+      "id": 12
+    },
+    {
+      "restaurantId": 17,
+      "author": "전재용",
+      "rating": 4,
+      "comment": "맛있음",
+      "date": "2026-07-22",
+      "id": 13
+    },
+    {
+      "restaurantId": 11,
+      "author": "전재용",
+      "rating": 3,
+      "comment": "아쉬움",
+      "date": "2026-07-22",
+      "id": 14
+    },
+    {
+      "restaurantId": 10,
+      "author": "전재용",
+      "rating": 5,
+      "comment": "맛있음",
+      "date": "2026-07-22",
+      "id": 15
+    },
+    {
+      "restaurantId": 6,
+      "author": "전재용",
+      "rating": 5,
+      "comment": "가성비 좋음",
+      "date": "2026-07-22",
+      "id": 16
+    },
+    {
+      "restaurantId": 20,
+      "author": "전재용",
+      "rating": 3,
+      "comment": "아쉬움",
+      "date": "2026-07-22",
+      "id": 17
+    },
+    {
+      "restaurantId": 9,
+      "author": "전재용",
+      "rating": 3,
+      "comment": "아쉬움",
+      "date": "2026-07-22",
+      "id": 18
+    },
+    {
+      "restaurantId": 5,
+      "author": "전재용",
+      "rating": 4,
+      "comment": "줄이 김",
+      "date": "2026-07-22",
+      "id": 19
+    },
+    {
+      "restaurantId": 21,
+      "author": "전재용",
+      "rating": 4,
+      "comment": "괜찮음",
+      "date": "2026-07-22",
+      "id": 20
+    },
+    {
+      "restaurantId": 7,
+      "author": "전재용",
+      "rating": 3,
+      "comment": "아쉬움",
+      "date": "2026-07-22",
+      "id": 21
+    },
+    {
+      "restaurantId": 16,
+      "author": "전재용",
+      "rating": 4,
+      "comment": "그저그럼",
+      "date": "2026-07-22",
+      "id": 22
+    }
+  ],
+  "users": [
+    {
+      "nickname": "전재용",
+      "id": 1
+    }
+  ],
+  "likes": [
+    {
+      "userId": 1,
+      "restaurantId": 19,
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "restaurantId": 6,
+      "id": 2
+    }
+  ]
+}

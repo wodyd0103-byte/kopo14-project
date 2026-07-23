@@ -1,0 +1,93 @@
+name: 배포
+
+# main에 밀면 이미지를 빌드해 GHCR에 올리고, 매니페스트의 이미지 태그를 커밋한다.
+# 그 다음은 ArgoCD가 알아서 한다 — 이 워크플로는 클러스터에 접속하지 않는다.
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      # 아래 스스로가 만드는 커밋 때문에 무한 반복되지 않도록 제외한다
+      - 'deploy/k8s/overlays/**'
+      - '**/*.md'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write   # 매니페스트 태그 커밋
+  packages: write   # GHCR 푸시
+
+env:
+  WEB_IMAGE: ghcr.io/${{ github.repository_owner }}/kopo14-web
+  API_IMAGE: ghcr.io/${{ github.repository_owner }}/kopo14-api
+  KUSTOMIZE_VERSION: '5.4.3'
+
+jobs:
+  build:
+    name: 이미지 빌드 및 매니페스트 갱신
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: GHCR 로그인
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: web 이미지 빌드/푸시
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags: |
+            ${{ env.WEB_IMAGE }}:${{ github.sha }}
+            ${{ env.WEB_IMAGE }}:latest
+          cache-from: type=gha,scope=web
+          cache-to: type=gha,scope=web,mode=max
+
+      - name: api 이미지 빌드/푸시
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile.api
+          push: true
+          tags: |
+            ${{ env.API_IMAGE }}:${{ github.sha }}
+            ${{ env.API_IMAGE }}:latest
+          cache-from: type=gha,scope=api
+          cache-to: type=gha,scope=api,mode=max
+
+      - name: kustomize 설치
+        run: |
+          curl -sSLo kustomize.tar.gz \
+            "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz"
+          tar -xzf kustomize.tar.gz
+          sudo install kustomize /usr/local/bin/kustomize
+
+      - name: 매니페스트 이미지 태그 갱신
+        run: |
+          cd deploy/k8s/overlays/local
+          kustomize edit set image "${WEB_IMAGE}=${WEB_IMAGE}:${GITHUB_SHA}"
+          kustomize edit set image "${API_IMAGE}=${API_IMAGE}:${GITHUB_SHA}"
+
+      - name: 커밋 및 푸시
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add deploy/k8s/overlays/local/kustomization.yaml
+
+          if git diff --staged --quiet; then
+            echo "태그가 그대로라 커밋할 것이 없습니다."
+            exit 0
+          fi
+
+          git commit -m "deploy: 이미지 태그 ${GITHUB_SHA::7}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

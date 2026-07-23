@@ -1,0 +1,6 @@
+# 컨테이너 안에서 실행되는 스크립트는 CRLF면 shebang이 깨진다. 항상 LF로 둔다.
+*.sh text eol=lf
+Dockerfile* text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.template text eol=lf

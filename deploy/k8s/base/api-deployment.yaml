@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kopo14-api
+  labels:
+    app.kubernetes.io/name: kopo14-api
+spec:
+  # json-server는 파일 하나를 직접 쓴다. 두 개가 동시에 쓰면 서로 덮어써서 깨지므로 1로 고정한다.
+  replicas: 1
+  strategy:
+    # RWO 볼륨은 한 Pod만 붙을 수 있다. RollingUpdate면 새 Pod가 볼륨을 못 잡고 멈춘다.
+    type: Recreate
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kopo14-api
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kopo14-api
+    spec:
+      containers:
+        - name: api
+          image: ghcr.io/wodyd0103-byte/kopo14-api:latest
+          ports:
+            - name: http
+              containerPort: 3000
+          volumeMounts:
+            - name: data
+              mountPath: /data
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: 50m
+              memory: 96Mi
+            limits:
+              memory: 256Mi
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: kopo14-api-data

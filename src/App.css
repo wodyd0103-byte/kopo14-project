@@ -1,0 +1,1189 @@
+/* ============================================================
+   서현역 맛집 — component styles
+   Brand: purple accent (--accent) + warm favorite coral (--fav)
+   All rules are token-driven and self-contained so each
+   component also renders correctly in isolation.
+   ============================================================ */
+
+/* ---- shell ---- */
+.app {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 8px 20px 64px;
+  text-align: left;
+}
+
+.app > h1 {
+  text-align: center;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 28px;
+}
+
+.nav a {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+}
+
+.nav a:hover {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* ---- segmented tabs: sort / best / category ---- */
+.sort-tabs,
+.best-tabs,
+.category-filter {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px;
+  background: var(--surface-2);
+  border-radius: var(--radius-pill);
+}
+
+.sort-tabs button,
+.best-tabs button,
+.category-filter button {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 7px 15px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sort-tabs button:hover,
+.best-tabs button:hover,
+.category-filter button:hover {
+  color: var(--text-h);
+}
+
+.sort-tabs button.active,
+.best-tabs button.active,
+.category-filter button.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.category-filter {
+  margin-bottom: 20px;
+}
+
+/* ---- favorite filter (toggle) ---- */
+.toggle-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-h);
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-filter input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+/* ---- favorite button (heart) ---- */
+.fav-btn {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.fav-btn:hover {
+  border-color: var(--fav);
+  color: var(--fav);
+}
+
+.fav-btn.active {
+  background: var(--fav-bg);
+  border-color: var(--fav);
+  color: var(--fav);
+}
+
+/* ---- restaurant cards ---- */
+.rcard-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.rcard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+}
+
+.rcard:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-border);
+  box-shadow: var(--shadow);
+}
+
+.rcard-media {
+  position: relative;
+}
+
+/* 이미지 zoom을 가두는 프레임 (메달리온은 이 밖으로 걸쳐야 하므로 media가 아닌 여기서 clip) */
+.rcard-thumb {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: var(--surface-2);
+}
+
+.rcard-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.rcard:hover .rcard-thumb img {
+  transform: scale(1.05);
+}
+
+/* 사진을 아직 등록하지 않은 카드의 자리 표시자 */
+.rcard-noimg {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  opacity: 0.35;
+  background: var(--surface-2);
+}
+
+/* 찜 — 사진 우상단에 뜬 원형 유리 하트 */
+.rcard-fav {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+}
+
+.fav-btn.icon {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  line-height: 1;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.92);
+  color: #b9b3c0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  transition: transform 0.15s, color 0.15s, background 0.15s;
+}
+
+.fav-btn.icon:hover {
+  transform: scale(1.12);
+  color: var(--fav);
+}
+
+.fav-btn.icon.active {
+  color: var(--fav);
+  background: #fff;
+}
+
+/* 별점 메달리온 — 사진 좌하단 경계에 걸침.
+   항상 사진 위에 얹히므로 테마와 무관하게 고정 다크 글래스 */
+.rcard-rating {
+  position: absolute;
+  left: 14px;
+  bottom: -13px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 11px;
+  border-radius: var(--radius-pill);
+  background: rgba(8, 6, 13, 0.82);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.rcard-rating .star {
+  color: var(--gold);
+  font-size: 13px;
+}
+
+.rcard-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  /* 상단 여백은 걸쳐 있는 메달리온을 피하기 위한 것 */
+  padding: 22px 16px 18px;
+}
+
+.rcard-cat {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--accent);
+}
+
+.rcard-name {
+  margin: 0;
+  font-family: var(--heading);
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  line-height: 1.3;
+  color: var(--text-h);
+}
+
+.rcard-desc {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rcard-meta {
+  margin-top: 2px;
+  font-size: 12.5px;
+  color: var(--text);
+  opacity: 0.85;
+}
+
+.empty {
+  padding: 40px 16px;
+  text-align: center;
+  color: var(--text);
+}
+
+/* ---- forms: create / edit / review ---- */
+.restaurant-form,
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.restaurant-form {
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.restaurant-form h2,
+.review-form h4 {
+  margin: 0;
+}
+
+/* 등록 화면 — 장소 검색 */
+.place-search {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.place-search-row {
+  display: flex;
+  gap: 8px;
+}
+
+.place-search-row input {
+  flex: 1;
+}
+
+.place-search-row button {
+  flex: none;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text-h);
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.place-results {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.place-results button {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 0;
+  background: var(--surface);
+  color: var(--text-h);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.place-results button:hover {
+  background: var(--surface-2);
+}
+
+.place-results button span {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.place-search-message {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text);
+}
+
+/* 메뉴 편집기 */
+.menu-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-editor-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.menu-editor-empty {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.menu-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menu-rows li {
+  display: flex;
+  gap: 6px;
+}
+
+.menu-rows input:first-child {
+  flex: 2;
+}
+
+.menu-rows input:nth-child(2) {
+  flex: 1;
+}
+
+.menu-row-remove,
+.menu-row-add {
+  flex: none;
+  padding: 8px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text-h);
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.menu-row-add {
+  align-self: flex-start;
+}
+
+/* 상세 모달의 메뉴 목록 */
+.menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menu-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed var(--border);
+}
+
+.menu-list .menu-price {
+  flex: none;
+  color: var(--text);
+}
+
+/* 사진 주소 입력 아래에 붙는 미리보기 */
+.image-preview {
+  display: block;
+  margin-top: 2px;
+}
+
+.image-preview img {
+  display: block;
+  max-width: 100%;
+  max-height: 160px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  object-fit: cover;
+}
+
+.image-preview-error {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--danger, #d64545);
+}
+
+.restaurant-form label,
+.review-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.restaurant-form input,
+.restaurant-form textarea,
+.restaurant-form select,
+.review-form input,
+.review-form textarea,
+.review-form select {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 400;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text-h);
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.restaurant-form textarea,
+.review-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.restaurant-form input:focus,
+.restaurant-form textarea:focus,
+.restaurant-form select:focus,
+.review-form input:focus,
+.review-form textarea:focus,
+.review-form select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* primary / secondary / danger buttons inside forms & modals */
+.form-actions button[type='submit'],
+.review-form button[type='submit'],
+.confirm-ok {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.15s, filter 0.15s;
+}
+
+.form-actions button[type='submit']:hover,
+.review-form button[type='submit']:hover,
+.confirm-ok:hover {
+  filter: brightness(1.08);
+}
+
+.form-actions button[type='submit']:disabled,
+.review-form button[type='submit']:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.form-actions button[type='button'],
+.confirm-cancel {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-h);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.form-actions button[type='button']:hover,
+.confirm-cancel:hover {
+  background: var(--surface-2);
+}
+
+/* ---- delete button (danger) ---- */
+.delete-btn,
+.confirm-ok {
+  border-color: var(--danger);
+}
+
+.delete-btn {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--danger);
+  background: var(--danger-bg);
+  color: var(--danger);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.delete-btn:hover {
+  background: var(--danger);
+  color: #fff;
+}
+
+.delete-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.confirm-ok {
+  background: var(--danger);
+}
+
+/* ---- modal ---- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: min(480px, 100%);
+  max-height: 85vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 16px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  max-height: 200px;
+  object-fit: cover;
+}
+
+.modal-content h2 {
+  margin: 0;
+}
+
+.modal-content .category {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.modal-content .meta,
+.modal-content .address,
+.modal-content .phone,
+.modal-content .hours,
+.modal-content .description {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.modal-close {
+  align-self: flex-end;
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: var(--surface-2);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 4px 0 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.edit-link {
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.edit-link:hover {
+  background: var(--accent-bg);
+}
+
+/* ---- reviews ---- */
+.review-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-item {
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+}
+
+.review-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.review-head b {
+  color: var(--text-h);
+}
+
+.review-delete {
+  margin-left: auto;
+  font: inherit;
+  font-size: 12px;
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--danger);
+  cursor: pointer;
+}
+
+.review-delete:hover {
+  border-color: var(--danger);
+  background: var(--danger-bg);
+}
+
+.review-comment {
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+.review-form {
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+/* ---- confirm modal ---- */
+.confirm-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: var(--shadow);
+}
+
+.confirm-message {
+  font-size: 16px;
+  color: var(--text-h);
+  line-height: 1.4;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.confirm-ok,
+.confirm-cancel {
+  padding: 8px 18px;
+}
+
+/* ---- best (ranking) ---- */
+.best-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.best-tabs {
+  align-self: center;
+}
+
+.best-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  counter-reset: rank;
+}
+
+.best-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.best-item .rank {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  color: var(--text-h);
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* signature: medal badges for the top three */
+.best-list li:nth-child(1) .rank {
+  background: var(--gold);
+  color: #3a2c00;
+}
+.best-list li:nth-child(2) .rank {
+  background: var(--silver);
+  color: #23252f;
+}
+.best-list li:nth-child(3) .rank {
+  background: var(--bronze);
+  color: #2a1600;
+}
+
+.best-item img {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.best-noimg {
+  width: 48px;
+  height: 48px;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  font-size: 20px;
+  opacity: 0.35;
+}
+
+.best-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.best-info .name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.best-info .meta {
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* ---- edit page / not found ---- */
+.edit-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.notfound {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 64px 16px;
+  text-align: center;
+}
+
+.notfound h2 {
+  margin: 0;
+}
+
+.notfound a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---- interaction quality floor ---- */
+.rcard:focus-visible,
+.like-btn:focus-visible,
+.logout-btn:focus-visible,
+.login-form button:focus-visible,
+.sort-tabs button:focus-visible,
+.best-tabs button:focus-visible,
+.category-filter button:focus-visible,
+.fav-btn:focus-visible,
+.delete-btn:focus-visible,
+.edit-link:focus-visible,
+.modal-close:focus-visible,
+.review-delete:focus-visible,
+.nav a:focus-visible,
+.form-actions button:focus-visible,
+.review-form button:focus-visible,
+.confirm-ok:focus-visible,
+.confirm-cancel:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rcard,
+  .rcard-thumb img,
+  .fav-btn.icon,
+  .nav a,
+  .fav-btn,
+  .sort-tabs button,
+  .best-tabs button,
+  .category-filter button {
+    transition: none;
+  }
+  .rcard:hover,
+  .rcard:hover .rcard-thumb img {
+    transform: none;
+  }
+  .modal-content {
+    animation: none;
+  }
+}
+
+/* ============================================================
+   Responsive
+   - 넓은 화면: 그리드가 더 많은 열을 사용 (셸 max-width 1040)
+   - 읽기 위주 콘텐츠(폼·베스트)는 좁게 유지해 늘어지지 않게
+   - 모바일: 상세 모달을 바텀시트로 전환 (전체 폭 + 내부 스크롤)
+   ============================================================ */
+.restaurant-form {
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+.best-page {
+  max-width: 620px;
+  margin-inline: auto;
+}
+
+@media (max-width: 560px) {
+  .rcard-grid {
+    gap: 14px;
+  }
+
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal-content {
+    width: 100%;
+    max-height: 90vh;
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 16px 16px calc(16px + env(safe-area-inset-bottom));
+    animation: sheet-up 0.22s ease;
+  }
+
+  .modal-content img {
+    max-height: 160px;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(24px);
+    opacity: 0.6;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+/* ============================================================
+   Auth — 로그인 화면 + 상단 사용자 바
+   ============================================================ */
+.login-screen {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 32px 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.login-card h1 {
+  font-size: 30px;
+  letter-spacing: -0.8px;
+  margin: 0 0 10px;
+}
+
+.login-sub {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  margin-bottom: 22px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.login-form input {
+  font: inherit;
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text-h);
+  text-align: center;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-bg);
+}
+
+.login-form button {
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 12px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.login-form button:hover {
+  opacity: 0.92;
+}
+
+.login-form button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.user-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 4px;
+  font-size: 14px;
+}
+
+.user-name {
+  color: var(--text-h);
+  font-weight: 600;
+}
+
+.logout-btn {
+  font: inherit;
+  font-size: 13px;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.logout-btn:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+/* ============================================================
+   Like — 사용자별 좋아요 버튼(👍 + 개수). 찜 하트(♥)와 구분되는 별개 개념
+   ============================================================ */
+.like-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.like-btn:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.like-btn.active {
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.like-count {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 카드 하단 줄: 리뷰수(좌) · 좋아요(우) */
+.rcard-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.rcard-foot .rcard-meta {
+  margin-top: 0;
+}
+
+/* 모달: 좋아요 · 등록자 표시 */
+.modal-like {
+  display: flex;
+}
+
+.owner {
+  font-size: 13px;
+  color: var(--text);
+}

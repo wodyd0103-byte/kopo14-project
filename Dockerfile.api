@@ -1,0 +1,16 @@
+# 백엔드: db.json을 REST API로 내주는 json-server.
+# 데이터는 이미지가 아니라 볼륨(/data)에 두어 Pod가 재시작해도 남는다.
+
+FROM node:22-alpine
+WORKDIR /app
+
+# package.json에 적힌 것과 같은 버전으로 고정한다
+RUN yarn global add json-server@0.17.4
+
+# 이미지에 든 db.json은 '씨앗'이다. 볼륨이 비어 있는 첫 기동에만 복사된다.
+COPY db.json /seed/db.json
+COPY deploy/api/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 3000
+ENTRYPOINT ["/entrypoint.sh"]

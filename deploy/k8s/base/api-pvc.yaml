@@ -1,0 +1,15 @@
+# db.json이 사는 곳. Pod가 죽어도 등록한 가게와 리뷰가 남으려면 볼륨이 필요하다.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: kopo14-api-data
+  labels:
+    app.kubernetes.io/name: kopo14-api
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  # storageClassName을 비워 두면 클러스터의 기본 StorageClass를 쓴다.
+  # (Docker Desktop은 hostpath, minikube는 standard)

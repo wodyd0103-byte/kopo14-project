@@ -1,0 +1,33 @@
+# ArgoCD에게 "이 저장소의 이 경로를 클러스터와 계속 맞춰라"라고 알려주는 정의.
+# kubectl apply -n argocd -f deploy/argocd/application.yaml 로 한 번만 등록하면 된다.
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kopo14
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/wodyd0103-byte/kopo14-project.git
+    targetRevision: main
+    path: deploy/k8s/overlays/local
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: kopo14
+
+  syncPolicy:
+    automated:
+      # git에서 지운 리소스는 클러스터에서도 지운다
+      prune: true
+      # 누가 kubectl로 손대면 git 내용대로 되돌린다
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 2m

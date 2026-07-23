@@ -1,0 +1,46 @@
+server {
+    listen 80;
+    server_name _;
+
+    root /usr/share/nginx/html;
+    index index.html;
+
+    # 업로드되는 리뷰 본문이 길 수 있어 기본값(1m)보다 넉넉히 둔다
+    client_max_body_size 8m;
+
+    gzip on;
+    gzip_types text/css application/javascript application/json image/svg+xml;
+    gzip_min_length 1024;
+
+    # 파일명에 해시가 붙는 빌드 산출물이라 오래 캐시해도 안전하다
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # json-server로 넘긴다. /api/restaurants -> <API_TARGET>/restaurants
+    location /api/ {
+        proxy_pass ${API_TARGET}/;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    # 네이버 검색 API. 개발 서버(vite.config.ts의 프록시)가 하던 일을 그대로 한다.
+    # 시크릿 키는 브라우저로 내려보내지 않고 여기서 헤더에 붙인다.
+    location /naver-api/ {
+        proxy_pass https://openapi.naver.com/v1/search/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host openapi.naver.com;
+        proxy_set_header X-Naver-Client-Id "${NAVER_CLIENT_ID}";
+        proxy_set_header X-Naver-Client-Secret "${NAVER_CLIENT_SECRET}";
+    }
+
+    # SPA: 실제 파일이 없는 경로는 index.html로 넘겨 react-router가 처리하게 한다.
+    # (/best 같은 주소를 새로고침해도 404가 나지 않도록)
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}

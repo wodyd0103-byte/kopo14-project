@@ -1,0 +1,21 @@
+# 바깥에서 들어오는 입구. /api, /naver-api 갈래는 nginx(web)가 알아서 나누므로
+# 여기서는 전부 web으로 보내면 된다.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kopo14
+  labels:
+    app.kubernetes.io/name: kopo14-web
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: kopo14.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kopo14-web
+                port:
+                  name: http
