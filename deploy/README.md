@@ -122,15 +122,57 @@ kubectl -n ingress-nginx port-forward svc/ingress-nginx-controller 8080:80
 Get-NetTCPConnection -State Listen -LocalPort 80 | Select-Object LocalAddress,OwningProcess
 ```
 
-`kopo14.local`이라는 이름으로 열고 싶다면 **관리자 권한** 메모장으로
-`C:\Windows\System32\drivers\etc\hosts`에 아래를 추가하세요. Ingress에 두 이름이
-모두 등록돼 있어 어느 쪽으로 열어도 됩니다.
+Ingress는 Host 이름을 가리지 않으므로 `http://kopo14.local:8080`으로 열고 싶다면
+**관리자 권한** 메모장으로 `C:\Windows\System32\drivers\etc\hosts`에 아래를 추가하면
+됩니다. (선택 사항입니다)
 
 ```
 127.0.0.1 kopo14.local
 ```
 
-→ http://kopo14.local:8080
+### 5. 다른 PC에서 접속하기 (같은 네트워크)
+
+내 PC를 서버로 두고 옆자리에서 접속하는 방식입니다. 세 가지를 바꿔야 합니다.
+
+**(1) port-forward를 모든 인터페이스에 바인딩**
+
+기본값은 `127.0.0.1`이라 내 PC에서만 닿습니다. `--address 0.0.0.0`을 붙입니다.
+
+```powershell
+kubectl -n ingress-nginx port-forward svc/ingress-nginx-controller 8080:80 --address 0.0.0.0
+```
+
+**(2) 방화벽에서 8080 인바운드 허용** — **관리자 권한 PowerShell**에서 한 번만
+
+```powershell
+New-NetFirewallRule -DisplayName "kopo14 (8080)" -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow -Profile Private
+```
+
+`-Profile Private`이라 사설망에서만 열립니다. 공용 와이파이에서는 열리지 않습니다.
+나중에 닫으려면:
+
+```powershell
+Remove-NetFirewallRule -DisplayName "kopo14 (8080)"
+```
+
+**(3) 내 IP 확인**
+
+```powershell
+Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.IPAddress -notlike "127.*" } | Select-Object IPAddress, InterfaceAlias
+```
+
+`이더넷` 또는 `Wi-Fi` 쪽 주소를 쓰세요. `vEthernet (WSL...)`이나 VirtualBox
+어댑터 주소는 다른 PC에서 닿지 않습니다.
+
+그 주소로 다른 기기에서 엽니다 → `http://192.168.0.5:8080` (예시)
+
+- 리뷰·등록·찜 모두 **내 클러스터의 볼륨 한 곳**에 쌓입니다
+- 가게 검색은 내 nginx가 **내 네이버 키로** 대신 호출합니다. 접속하는 사람은
+  아무 설정도 필요 없습니다
+- port-forward 창을 닫으면 모두 끊깁니다
+
+> **주의:** json-server에는 인증이 없습니다. 주소를 아는 사람은 누구나 데이터를
+> 지우거나 고칠 수 있습니다. 같은 사무실·강의실 정도에서만 쓰세요.
 
 ---
 

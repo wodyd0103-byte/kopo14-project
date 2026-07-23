@@ -1,5 +1,12 @@
 # 바깥에서 들어오는 입구. /api, /naver-api 갈래는 nginx(web)가 알아서 나누므로
 # 여기서는 전부 web으로 보내면 된다.
+#
+# host를 적지 않으면 어떤 이름으로 들어와도 받는다. localhost로 열든,
+# kopo14.local로 열든, 다른 PC가 내 IP(예: 192.168.23.217:8080)로 들어오든
+# 전부 여기로 온다. 이름을 박아 두면 Host 헤더가 다른 접속은 404가 난다.
+#
+# 도메인을 붙여 인터넷에 열 때는 host를 명시해 아무 이름으로나 들어오는 요청을
+# 막는 편이 낫다. 지금은 로컬·사내망에서 열어 보는 용도라 열어 둔다.
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -9,21 +16,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    # hosts 파일에 '127.0.0.1 kopo14.local'을 넣었을 때 쓰는 이름
-    - host: kopo14.local
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: kopo14-web
-                port:
-                  name: http
-    # hosts를 건드리지 않고 바로 열어 보기 위한 이름.
-    # 관리자 권한이 필요 없어서 로컬 확인에는 이쪽이 편하다.
-    - host: localhost
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
