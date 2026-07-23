@@ -458,6 +458,33 @@
 }
 
 /* 상세 모달의 메뉴 목록 */
+/* 복사해 온 메뉴를 통째로 붙여넣는 자리 */
+.menu-paste {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-paste-hint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.menu-paste textarea {
+  font: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.menu-paste-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
 .menu-list {
   list-style: none;
   margin: 0;
