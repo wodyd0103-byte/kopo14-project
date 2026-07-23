@@ -136,8 +136,8 @@ function EditRestaurant() {
     )
   }
 
-  // 등록자 본인만 수정 가능 (등록자 정보가 없는 공용/레거시 데이터는 허용)
-  const canManage = !restaurant.ownerId || restaurant.ownerId === user.id
+  // 등록자 본인만 수정 가능. 등록자를 모르는 항목은 아무도 고칠 수 없다.
+  const canManage = !!restaurant.ownerId && restaurant.ownerId === user.id
   if (!canManage) {
     return (
       <div className="edit-page">

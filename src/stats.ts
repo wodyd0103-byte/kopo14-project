@@ -1,4 +1,11 @@
-import type { Like, Restaurant, RestaurantStats, Review, SortKey } from './types'
+import type {
+  Favorite,
+  Like,
+  Restaurant,
+  RestaurantStats,
+  Review,
+  SortKey,
+} from './types'
 
 // 소수점 첫째 자리까지 반올림 (4.333… → 4.3)
 function round1(value: number): number {
@@ -61,6 +68,23 @@ export function applyLikes(
     likeCount: count.get(r.id) ?? 0,
     likedByMe: mine.has(r.id),
   }))
+}
+
+// favorites 컬렉션으로부터 '내가 찜했는지'를 채워 넣는다.
+// 좋아요와 달리 개수는 쓰지 않는다 — 찜은 남에게 보여주는 값이 아니라 내 표시다.
+export function applyFavorites(
+  restaurants: Restaurant[],
+  favorites: Favorite[],
+  currentUserId: number | null,
+): Restaurant[] {
+  const mine = new Set<number>()
+  if (currentUserId !== null) {
+    for (const fav of favorites) {
+      if (fav.userId === currentUserId) mine.add(fav.restaurantId)
+    }
+  }
+
+  return restaurants.map((r) => ({ ...r, favoritedByMe: mine.has(r.id) }))
 }
 
 // 화면에 찍을 평점 문자열 — 아직 리뷰가 없으면 0.0 대신 '–'

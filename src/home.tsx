@@ -16,7 +16,7 @@ function Home() {
   const [selectedId, setSelectedId] = useState<number | null>(null)
 
   const homeList = restaurants
-    .filter((r) => (onlyFavorites ? r.isFavorite : true))
+    .filter((r) => (onlyFavorites ? r.favoritedByMe : true))
     .sort(compareBy(sortKey))
 
   const selected = restaurants.find((r) => r.id === selectedId) ?? null

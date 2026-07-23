@@ -17,30 +17,10 @@ function ConfirmModal({ message, onConfirm, onCancel }: Props) {
   }, [onCancel])
 
   return (
-    <div
-      className="confirm-overlay"
-      onClick={onCancel}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        background: 'rgba(0, 0, 0, 0.5)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 1000,
-      }}
-    >
-      <div
-        className="confirm-content"
-        onClick={(e) => e.stopPropagation()}
-        style={{
-          background: '#fff',
-          maxWidth: 320,
-          width: '90%',
-          padding: 20,
-          borderRadius: 8,
-        }}
-      >
+    // 모양은 App.css가 정한다. 여기서 배경을 흰색으로 박아 두었더니
+    // 다크 모드에서 글자색만 밝아져 흰 바탕에 흰 글씨가 됐다.
+    <div className="confirm-overlay" onClick={onCancel}>
+      <div className="confirm-content" onClick={(e) => e.stopPropagation()}>
         <p className="confirm-message">{message}</p>
         <div className="confirm-actions">
           <button type="button" className="confirm-ok" onClick={onConfirm}>

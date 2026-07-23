@@ -53,7 +53,7 @@ function RestaurantList({
             <div className="rcard-fav">
               <FavoriteButton
                 variant="icon"
-                isFavorite={r.isFavorite}
+                isFavorite={!!r.favoritedByMe}
                 onToggle={() => onToggleFavorite(r)}
               />
             </div>

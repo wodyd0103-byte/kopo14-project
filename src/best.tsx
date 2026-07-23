@@ -58,7 +58,7 @@ function Best() {
                 <p className="meta">
                   ⭐ {formatRating(r)} · 리뷰 {r.reviewCount}개 · 👍{' '}
                   {r.likeCount ?? 0}
-                  {r.isFavorite ? ' · ♥ 찜' : ''}
+                  {r.favoritedByMe ? ' · ♥ 찜' : ''}
                 </p>
               </div>
             </li>

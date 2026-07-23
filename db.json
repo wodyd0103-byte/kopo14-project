@@ -22,9 +22,10 @@
       "phone": null,
       "hours": null,
       "image": "https://d12zq4w4guyljn.cloudfront.net/750_750_20231029043756_photo1_5a0f3a4d7b37.webp",
-      "isFavorite": false,
       "link": "https://www.instagram.com/skb202510",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 2,
@@ -42,9 +43,10 @@
       "phone": null,
       "hours": null,
       "image": "https://ldb-phinf.pstatic.net/20230529_4/1685323649068KbAi7_JPEG/1685323629446.jpg",
-      "isFavorite": false,
       "link": "",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 3,
@@ -62,9 +64,10 @@
       "phone": null,
       "hours": null,
       "image": "https://pup-post-phinf.pstatic.net/MjAyNjA0MThfMjU0/MDAxNzc2NDc4ODEzMjgz.XLEVAfsZrtwecScxPebz7yNttA5wDoNPNpIHdX30qkcg.FVUsMTa07gj9PQv76JCAi7ZTZ4UW3FdopD05Si9vFsgg.JPEG/PostEncodingTask.3690D4AA-DDA1-45F1-BA7E-7054B5566889.jpg",
-      "isFavorite": false,
       "link": "",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 4,
@@ -82,9 +85,10 @@
       "phone": null,
       "hours": null,
       "image": "https://ldb-phinf.pstatic.net/20210627_86/1624803543874tprRp_JPEG/vpam08lgYHPnnqA22ZxSrguB.JPG.jpg",
-      "isFavorite": false,
       "link": "https://blog.naver.com/xsx528",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 5,
@@ -102,9 +106,10 @@
       "phone": null,
       "hours": null,
       "image": "https://d2uja84sd90jmv.cloudfront.net/posts/lGXOf3AYBU2gYaaAhUs00A/ms.jpg",
-      "isFavorite": false,
       "link": "",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 6,
@@ -122,9 +127,10 @@
       "phone": null,
       "hours": null,
       "image": "",
-      "isFavorite": true,
       "link": "",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 7,
@@ -142,9 +148,10 @@
       "phone": null,
       "hours": null,
       "image": "",
-      "isFavorite": false,
       "link": "",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 8,
@@ -162,9 +169,10 @@
       "phone": null,
       "hours": null,
       "image": "https://ldb-phinf.pstatic.net/20260614_51/1781440416554zXS2A_JPEG/IMG_2569.jpg",
-      "isFavorite": false,
       "link": "",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 9,
@@ -182,9 +190,10 @@
       "phone": null,
       "hours": null,
       "image": "https://d2uja84sd90jmv.cloudfront.net/posts/Czm7aU1Xhc_DrGQ4OhXKow/ms.jpg",
-      "isFavorite": false,
       "link": "",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 10,
@@ -202,9 +211,10 @@
       "phone": null,
       "hours": null,
       "image": "https://ldb-phinf.pstatic.net/20260423_58/1776918015368QQFp3_JPEG/KakaoTalk_20260423_130910014.jpg",
-      "isFavorite": false,
       "link": "https://www.instagram.com/ondam.guksu/",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 11,
@@ -222,9 +232,10 @@
       "phone": null,
       "hours": null,
       "image": "https://d2uja84sd90jmv.cloudfront.net/posts/1_t0XHUfd4ImfYXmceqn0Q/ms.jpg?updated=-62167392000",
-      "isFavorite": false,
       "link": "",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 12,
@@ -242,9 +253,10 @@
       "phone": null,
       "hours": null,
       "image": "https://d12zq4w4guyljn.cloudfront.net/20240219065956224_photo_533c6cd51e0c.webp",
-      "isFavorite": false,
       "link": "https://www.lotteria.com/",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 13,
@@ -262,9 +274,10 @@
       "phone": null,
       "hours": null,
       "image": "https://ldb-phinf.pstatic.net/20210607_59/1623071967780zSQwV_PNG/7YLBWZGvidDvaBixZD8KjEXW.png",
-      "isFavorite": false,
       "link": "",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 14,
@@ -282,9 +295,10 @@
       "phone": null,
       "hours": null,
       "image": "https://ldb-phinf.pstatic.net/20240331_62/1711842994839BUDAr_JPEG/%B1%B9%BC%F6%B7%F9%C0%FC%C3%BC.jpg",
-      "isFavorite": false,
       "link": "",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 15,
@@ -302,9 +316,10 @@
       "phone": null,
       "hours": null,
       "image": "https://pup-post-phinf.pstatic.net/MjAyNjAzMTlfODQg/MDAxNzczODc3MjE1Mzk4.wwnmMmg9HQ07y00aAYpC-d_hj6N4Iq7ZiNfTgSqDz-sg.hsYKtSuXhB7fKVWZAd7YPz4tNEawjZDvp5kXpvAKiVkg.JPEG/POST_IMAGE_ENCODING_20260319_084014_679.jpg",
-      "isFavorite": false,
       "link": "https://blog.naver.com/misoya-official",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 16,
@@ -322,9 +337,10 @@
       "phone": null,
       "hours": null,
       "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/0a/18/a4/kfc.jpg?w=1600&h=1600&s=1",
-      "isFavorite": false,
       "link": "https://www.kfckorea.com/",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 17,
@@ -342,9 +358,10 @@
       "phone": null,
       "hours": null,
       "image": "https://ldb-phinf.pstatic.net/20260512_213/17785759796206TEFk_JPEG/%C8%AD%C0%CC%C6%AE%C5%E6%BC%BF%B7%BA_402076_%BA%B8%C1%A42.jpg",
-      "isFavorite": false,
       "link": "",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 18,
@@ -362,9 +379,10 @@
       "phone": null,
       "hours": null,
       "image": "https://ldb-phinf.pstatic.net/20250804_129/1754283008901oQde3_PNG/%BD%BA%C5%A9%B8%B0%BC%A6_2025-08-04_%BF%C0%C8%C4_1.49.58.png",
-      "isFavorite": false,
       "link": "",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 19,
@@ -382,9 +400,10 @@
       "phone": null,
       "hours": null,
       "image": "https://image-logo.alba.kr/%2Fdata_image2%2Fcomlogo%2F202303%2F2023031012304287238_0_m.png",
-      "isFavorite": false,
       "link": "",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 20,
@@ -402,9 +421,10 @@
       "phone": null,
       "hours": null,
       "image": "https://ldb-phinf.pstatic.net/20260424_205/1777031093691C3HMD_JPEG/KakaoTalk_20260424_161300127.jpg",
-      "isFavorite": false,
       "link": "https://www.instagram.com/utaro_ramen_official",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 21,
@@ -422,9 +442,10 @@
       "phone": null,
       "hours": null,
       "image": "https://ldb-phinf.pstatic.net/20260215_284/1771085994656XHJOf_PNG/%B0%ED%B7%CE%C4%C9%BB%F8%B7%AF%B5%E5.png",
-      "isFavorite": false,
       "link": "https://www.instagram.com/hachiro_donburi?igsh=MWozamNtdXZ0Zjk2Ng==",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "id": 22,
@@ -442,9 +463,10 @@
       "phone": null,
       "hours": null,
       "image": "https://ldb-phinf.pstatic.net/20260421_209/1776746384802isH9k_JPEG/%C8%B2%C5%C2%C7%D8%C0%E5%B1%B9.jpg",
-      "isFavorite": false,
       "link": "https://www.sinsagol.com",
-      "menu": []
+      "menu": [],
+      "ownerId": 1,
+      "ownerName": "전재용"
     },
     {
       "name": "중화일상 서현점",
@@ -462,7 +484,6 @@
       "menu": [],
       "rating": 0,
       "reviewCount": 0,
-      "isFavorite": false,
       "ownerId": 1,
       "ownerName": "전재용",
       "id": 23
@@ -475,7 +496,8 @@
       "rating": 5,
       "comment": "좋았음",
       "date": "2026-07-22",
-      "id": 1
+      "id": 1,
+      "userId": 1
     },
     {
       "restaurantId": 13,
@@ -483,7 +505,8 @@
       "rating": 4,
       "comment": "보통",
       "date": "2026-07-22",
-      "id": 2
+      "id": 2,
+      "userId": 1
     },
     {
       "restaurantId": 19,
@@ -491,7 +514,8 @@
       "rating": 5,
       "comment": "좋았음",
       "date": "2026-07-22",
-      "id": 3
+      "id": 3,
+      "userId": 1
     },
     {
       "restaurantId": 12,
@@ -499,7 +523,8 @@
       "rating": 4,
       "comment": "보통",
       "date": "2026-07-22",
-      "id": 4
+      "id": 4,
+      "userId": 1
     },
     {
       "restaurantId": 18,
@@ -507,7 +532,8 @@
       "rating": 3,
       "comment": "아쉬움",
       "date": "2026-07-22",
-      "id": 5
+      "id": 5,
+      "userId": 1
     },
     {
       "restaurantId": 3,
@@ -515,7 +541,8 @@
       "rating": 4,
       "comment": "비쌈",
       "date": "2026-07-22",
-      "id": 6
+      "id": 6,
+      "userId": 1
     },
     {
       "restaurantId": 15,
@@ -523,7 +550,8 @@
       "rating": 3,
       "comment": "아쉬움",
       "date": "2026-07-22",
-      "id": 7
+      "id": 7,
+      "userId": 1
     },
     {
       "restaurantId": 2,
@@ -531,7 +559,8 @@
       "rating": 5,
       "comment": "맛있음",
       "date": "2026-07-22",
-      "id": 8
+      "id": 8,
+      "userId": 1
     },
     {
       "restaurantId": 8,
@@ -539,7 +568,8 @@
       "rating": 5,
       "comment": "맛있음",
       "date": "2026-07-22",
-      "id": 9
+      "id": 9,
+      "userId": 1
     },
     {
       "restaurantId": 4,
@@ -547,7 +577,8 @@
       "rating": 5,
       "comment": "맛있음",
       "date": "2026-07-22",
-      "id": 10
+      "id": 10,
+      "userId": 1
     },
     {
       "restaurantId": 1,
@@ -555,7 +586,8 @@
       "rating": 4,
       "comment": "맛있음",
       "date": "2026-07-22",
-      "id": 11
+      "id": 11,
+      "userId": 1
     },
     {
       "restaurantId": 22,
@@ -563,7 +595,8 @@
       "rating": 5,
       "comment": "맛있음",
       "date": "2026-07-22",
-      "id": 12
+      "id": 12,
+      "userId": 1
     },
     {
       "restaurantId": 17,
@@ -571,7 +604,8 @@
       "rating": 4,
       "comment": "맛있음",
       "date": "2026-07-22",
-      "id": 13
+      "id": 13,
+      "userId": 1
     },
     {
       "restaurantId": 11,
@@ -579,7 +613,8 @@
       "rating": 3,
       "comment": "아쉬움",
       "date": "2026-07-22",
-      "id": 14
+      "id": 14,
+      "userId": 1
     },
     {
       "restaurantId": 10,
@@ -587,7 +622,8 @@
       "rating": 5,
       "comment": "맛있음",
       "date": "2026-07-22",
-      "id": 15
+      "id": 15,
+      "userId": 1
     },
     {
       "restaurantId": 6,
@@ -595,7 +631,8 @@
       "rating": 5,
       "comment": "가성비 좋음",
       "date": "2026-07-22",
-      "id": 16
+      "id": 16,
+      "userId": 1
     },
     {
       "restaurantId": 20,
@@ -603,7 +640,8 @@
       "rating": 3,
       "comment": "아쉬움",
       "date": "2026-07-22",
-      "id": 17
+      "id": 17,
+      "userId": 1
     },
     {
       "restaurantId": 9,
@@ -611,7 +649,8 @@
       "rating": 3,
       "comment": "아쉬움",
       "date": "2026-07-22",
-      "id": 18
+      "id": 18,
+      "userId": 1
     },
     {
       "restaurantId": 5,
@@ -619,7 +658,8 @@
       "rating": 4,
       "comment": "줄이 김",
       "date": "2026-07-22",
-      "id": 19
+      "id": 19,
+      "userId": 1
     },
     {
       "restaurantId": 21,
@@ -627,7 +667,8 @@
       "rating": 4,
       "comment": "괜찮음",
       "date": "2026-07-22",
-      "id": 20
+      "id": 20,
+      "userId": 1
     },
     {
       "restaurantId": 7,
@@ -635,7 +676,8 @@
       "rating": 3,
       "comment": "아쉬움",
       "date": "2026-07-22",
-      "id": 21
+      "id": 21,
+      "userId": 1
     },
     {
       "restaurantId": 16,
@@ -643,7 +685,8 @@
       "rating": 4,
       "comment": "그저그럼",
       "date": "2026-07-22",
-      "id": 22
+      "id": 22,
+      "userId": 1
     }
   ],
   "users": [
@@ -662,6 +705,13 @@
       "userId": 1,
       "restaurantId": 6,
       "id": 2
+    }
+  ],
+  "favorites": [
+    {
+      "id": 1,
+      "userId": 1,
+      "restaurantId": 6
     }
   ]
 }

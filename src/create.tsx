@@ -105,9 +105,9 @@ function CreateRestaurant({ onCreated, onClose }: Props) {
       ate: form.ate,
       rating: 0,
       reviewCount: 0,
-      isFavorite: false,
-      ownerId: user?.id ?? null,
-      ownerName: user?.nickname ?? '',
+      // 등록자를 반드시 남긴다. 없으면 나중에 아무도 고치거나 지울 수 없다.
+      ownerId: user.id,
+      ownerName: user.nickname,
     }
 
     try {

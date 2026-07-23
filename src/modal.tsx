@@ -21,12 +21,13 @@ interface Props {
 }
 
 type ReviewForm = {
-  author: string
   rating: number
   comment: string
 }
 
-const EMPTY_REVIEW: ReviewForm = { author: '', rating: 5, comment: '' }
+// 작성자는 로그인한 사람으로 정해진다. 예전에는 직접 입력받아서
+// 남의 이름을 대고 리뷰를 남길 수 있었다.
+const EMPTY_REVIEW: ReviewForm = { rating: 5, comment: '' }
 
 // 항목 클릭 시 열리는 상세 모달 (음식점 정보 + 리뷰 목록/작성/삭제)
 function Modal({ restaurant, onClose, onDeleted }: Props) {
@@ -37,10 +38,10 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
   const [form, setForm] = useState<ReviewForm>(EMPTY_REVIEW)
   const [submitting, setSubmitting] = useState(false)
 
-  // 등록자 본인만 수정·삭제 (등록자 정보가 없는 공용/레거시 데이터는 로그인한 사람이면 가능).
-  // user를 먼저 확인하지 않으면, 둘러보는 사람에게도 ownerId 없는 옛 데이터가 열린다.
-  const canManage =
-    !!user && (!restaurant.ownerId || restaurant.ownerId === user.id)
+  // 등록자 본인만 수정·삭제.
+  // 예전에는 ownerId가 없으면 누구에게나 열어 줬는데, 기존 데이터 대부분이
+  // ownerId가 없어서 사실상 로그인한 아무나 남의 가게를 지울 수 있었다.
+  const canManage = !!user && !!restaurant.ownerId && restaurant.ownerId === user.id
 
   const reviews = useMemo(
     () => allReviews.filter((v) => v.restaurantId === restaurant.id),
@@ -65,7 +66,7 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
     }
   }, [])
 
-  // 작성자/내용 입력 (문자열 필드)
+  // 내용 입력 (문자열 필드)
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -87,7 +88,6 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
     try {
       await addReview({
         restaurantId: restaurant.id,
-        author: form.author.trim(),
         rating: form.rating,
         comment: form.comment.trim(),
         date: new Date().toISOString().slice(0, 10),
@@ -136,7 +136,7 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
           <LikeButton
             liked={!!restaurant.likedByMe}
             count={restaurant.likeCount ?? 0}
-            onToggle={() => toggleLike(restaurant)}
+            onToggle={() => void toggleLike(restaurant)}
           />
         </div>
         {restaurant.ownerName && (
@@ -209,7 +209,8 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
             <li key={review.id} className="review-item">
               <p className="review-head">
                 <b>{review.author}</b> ⭐ {review.rating} · {review.date}
-                {user && (
+                {/* 내가 쓴 리뷰만 지울 수 있다. 작성자를 모르는 옛 리뷰는 아무도 못 지운다. */}
+                {user && review.userId === user.id && (
                   <button
                     type="button"
                     className="review-delete"
@@ -231,13 +232,10 @@ function Modal({ restaurant, onClose, onDeleted }: Props) {
         ) : (
         <form className="review-form" onSubmit={handleSubmit}>
           <h4>리뷰 작성</h4>
-          <input
-            name="author"
-            value={form.author}
-            onChange={handleChange}
-            placeholder="작성자"
-            required
-          />
+          {/* 이름을 고를 수 없다는 것을 분명히 보여 준다 */}
+          <p className="review-as">
+            <b>{user.nickname}</b>님 이름으로 올라갑니다.
+          </p>
           <label>
             평점
             <select name="rating" value={form.rating} onChange={handleRatingChange}>

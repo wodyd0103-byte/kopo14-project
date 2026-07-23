@@ -309,6 +309,62 @@
   color: var(--text);
 }
 
+/* 불러오는 중 — '없음'과 구분해서 보여준다 */
+.loading {
+  padding: 40px 16px;
+  text-align: center;
+  color: var(--text);
+}
+
+/* 불러오기 실패 — 조용히 빈 화면을 두면 서버가 죽은 걸 알 수 없다 */
+.load-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 20px 16px;
+  border: 1px solid var(--danger);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-align: center;
+}
+
+.load-error p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-h);
+}
+
+.load-error button {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: var(--bg);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.load-error button:hover {
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+/* 리뷰가 누구 이름으로 올라가는지 알리는 줄 */
+.review-as {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.review-as b {
+  color: var(--text-h);
+}
+
 /* ---- forms: create / edit / review ---- */
 .restaurant-form,
 .review-form {
@@ -904,10 +960,29 @@
 }
 
 /* ---- confirm modal ---- */
+/* 배경과 글자색이 같은 테마를 따라야 다크 모드에서 흰 바탕에 흰 글씨가 되지 않는다 */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
 .confirm-content {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
+  max-width: 340px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
   box-shadow: var(--shadow);
 }
 

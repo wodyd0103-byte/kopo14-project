@@ -28,17 +28,20 @@ export interface Restaurant {
   // 네이버가 메뉴를 API로 주지 않아 menu는 대부분 비어 있는데, 이건 실제로 먹은 것이라
   // 채워질수록 그 자체가 쓸모 있는 메뉴 목록이 된다.
   ate?: string[]
-  isFavorite: boolean
-  ownerId?: number | null // 등록자 user id (없으면 공용/레거시 데이터)
+  ownerId?: number | null // 등록자 user id (없으면 아무도 수정·삭제할 수 없다)
   ownerName?: string // 등록자 닉네임 (표시용)
-  // 아래 둘은 likes 컬렉션에서 계산해 채우는 파생값 — 레코드에는 저장하지 않는다
+  // 아래는 likes/favorites 컬렉션에서 계산해 채우는 파생값 — 레코드에는 저장하지 않는다
   likeCount?: number
   likedByMe?: boolean
+  favoritedByMe?: boolean
 }
 
 export interface Review {
   id: number
   restaurantId: number
+  // 누가 썼는지. 이게 있어야 본인 리뷰만 지울 수 있다.
+  // 없는 리뷰는 주인을 알 수 없으므로 아무도 지우지 못한다.
+  userId?: number | null
   author: string
   rating: number
   comment: string
@@ -53,6 +56,15 @@ export interface User {
 
 // 사용자별 좋아요 한 건 (userId × restaurantId 조합이 곧 '누가 무엇을 눌렀나')
 export interface Like {
+  id: number
+  userId: number
+  restaurantId: number
+}
+
+// 사용자별 찜 한 건. 좋아요와 구조가 같다.
+// 예전에는 가게 레코드의 isFavorite 한 칸을 모두가 함께 고쳐서, 한 사람이 찜하면
+// 다른 사람 화면에서도 찜으로 보였다. 그래서 좋아요와 같은 방식으로 떼어냈다.
+export interface Favorite {
   id: number
   userId: number
   restaurantId: number
